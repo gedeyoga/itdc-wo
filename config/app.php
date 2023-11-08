@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\ViewComposerServiceProvider;
+
 return [
 
     /*
@@ -161,10 +163,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        ViewComposerServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
