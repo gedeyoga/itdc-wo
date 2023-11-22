@@ -3,8 +3,12 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\PriorityController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\TaskCategoryController;
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WorkOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +43,43 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/permission', [RoleController::class, 'permissionStore'])->name('permission.store');
         Route::get('/permission', [RoleController::class, 'permissionList'])->name('permission.list');
     });
+
+    //Task
+    Route::group(['prefix' => 'tasks', 'as' => 'api.task.'], function () {
+        Route::get('/', [TaskController::class, 'list'])->name('list');
+        Route::post('/', [TaskController::class, 'store'])->name('store');
+        Route::put('/{task}', [TaskController::class, 'update'])->name('update');
+        Route::get('/{task}', [TaskController::class, 'show'])->name('show');
+        Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
+    });
+
+    //Task Categories
+    Route::group(['prefix' => 'task-categories', 'as' => 'api.task-categories.'], function () {
+        Route::get('/', [TaskCategoryController::class, 'list'])->name('list');
+        Route::post('/', [TaskCategoryController::class, 'store'])->name('store');
+        Route::put('/{task_category}', [TaskCategoryController::class, 'update'])->name('update');
+        Route::get('/{task_category}', [TaskCategoryController::class, 'show'])->name('show');
+        Route::delete('/{task_category}', [TaskCategoryController::class, 'store'])->name('destroy');
+    });
+
+    //Priorities
+    Route::group(['prefix' => 'priorities', 'as' => 'api.priorities.'], function () {
+        Route::get('/', [PriorityController::class, 'list'])->name('list');
+        Route::post('/', [PriorityController::class, 'store'])->name('store');
+        Route::put('/{priority}', [PriorityController::class, 'update'])->name('update');
+        Route::get('/{priority}', [PriorityController::class, 'show'])->name('show');
+        Route::delete('/{priority}', [PriorityController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group(['prefix' => 'work-order', 'as' => 'api.work-order.'], function () {
+        Route::get('/', [WorkOrderController::class, 'list'])->name('list');
+        Route::post('/', [WorkOrderController::class, 'store'])->name('store');
+        Route::put('/{work_order}', [WorkOrderController::class, 'update'])->name('update');
+        Route::get('/{work_order}', [WorkOrderController::class, 'show'])->name('show');
+        Route::delete('/{work_order}', [WorkOrderController::class, 'destroy'])->name('destroy');
+
+        Route::post('/{work_order}/status', [WorkOrderController::class, 'updateStatus'])->name('update-status');
+    });
+
+
 });

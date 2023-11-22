@@ -15,6 +15,7 @@ import App from "./components/core/App";
 import routes from "./routes";
 import imagePreview from "image-preview-vue";
 import "image-preview-vue/lib/imagepreviewvue.css";
+import store from "./store.js"; 
 
 require("./filters");
 require("./components");
@@ -94,6 +95,7 @@ Vue.prototype.$csrfToken = token;
 const app = new Vue({
     el: "#app",
     router: routes,
+    store,
     render: (h) => h(App)
 });
 

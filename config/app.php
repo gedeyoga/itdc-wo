@@ -169,6 +169,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
 
         /*
          * Application Service Providers...

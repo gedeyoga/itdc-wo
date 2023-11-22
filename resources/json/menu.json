@@ -9,7 +9,7 @@
                 "active": true
             },
             {
-                "menu_title": "Kelola Pengguna",
+                "menu_title": "User Management",
                 "menu_icon": "bxs-user-circle",
                 "child_routes": [
                     {
@@ -20,6 +20,23 @@
                     {
                         "name": "roles.index",
                         "menu_title": "Role",
+                        "active": false
+                    }
+                ],
+                "active": false
+            },
+            {
+                "menu_title": "Task Management",
+                "menu_icon": "bxs-notepad",
+                "child_routes": [
+                    {
+                        "name": "tasks.index",
+                        "menu_title": "Task",
+                        "active": false
+                    },
+                    {
+                        "name": "task-categories.index",
+                        "menu_title": "Task Category",
                         "active": false
                     }
                 ],

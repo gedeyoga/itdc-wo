@@ -2,12 +2,27 @@
 
 namespace App\Providers;
 
+use App\Models\Priority;
 use App\Models\Role;
+use App\Models\Task;
+use App\Models\TaskCategory;
 use App\Models\User;
+use App\Models\WorkOrder;
+use App\Models\WorkOrderItem;
+use App\Repositories\Eloquent\EloquentPriorityRepository;
 use App\Repositories\Eloquent\EloquentRoleRepository;
+use App\Repositories\Eloquent\EloquentTaskCategoryRepository;
+use App\Repositories\Eloquent\EloquentTaskRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
+use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
+use App\Repositories\Eloquent\EloquentWorkOrderRepository;
+use App\Repositories\PriorityRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\TaskCategoryRepository;
+use App\Repositories\TaskRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\WorkOrderItemRepository;
+use App\Repositories\WorkOrderRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +44,41 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepository::class, function () {
 
             $repository = new EloquentRoleRepository(new Role());
+
+            return $repository;
+        });
+
+        $this->app->bind(TaskRepository::class, function () {
+
+            $repository = new EloquentTaskRepository(new Task());
+
+            return $repository;
+        });
+
+        $this->app->bind(TaskCategoryRepository::class, function () {
+
+            $repository = new EloquentTaskCategoryRepository(new TaskCategory());
+
+            return $repository;
+        });
+
+        $this->app->bind(PriorityRepository::class, function () {
+
+            $repository = new EloquentPriorityRepository(new Priority());
+
+            return $repository;
+        });
+
+        $this->app->bind(WorkOrderRepository::class, function () {
+
+            $repository = new EloquentWorkOrderRepository(new WorkOrder());
+
+            return $repository;
+        });
+
+        $this->app->bind(WorkOrderItemRepository::class, function () {
+
+            $repository = new EloquentWorkOrderItemRepository(new WorkOrderItem());
 
             return $repository;
         });

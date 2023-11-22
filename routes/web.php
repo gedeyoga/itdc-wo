@@ -3,8 +3,11 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PriorityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TaskCategoryController;
+use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users/{user}/profile', [UserController::class, 'profile'])->name('users.profile');
     
     Route::resource('roles', RoleController::class);
+
+    Route::get('/tasks' , [TaskController::class, 'index'])->name('tasks.list');
+    Route::get('/task-categories' , [TaskCategoryController::class, 'index'])->name('task-categories.list');
+    Route::get('/priorities' , [PriorityController::class, 'index'])->name('priorities.list');
 });
 
 Auth::routes();

@@ -631,7 +631,7 @@ render._withStripped = true
   \**********************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('[{"group_name":"Menu","group_menu":[{"name":"home","menu_title":"Dashboard","menu_icon":"bx-home-circle","active":true},{"menu_title":"Kelola Pengguna","menu_icon":"bxs-user-circle","child_routes":[{"name":"users.index","menu_title":"User","active":false},{"name":"roles.index","menu_title":"Role","active":false}],"active":false}]}]');
+module.exports = JSON.parse('[{"group_name":"Menu","group_menu":[{"name":"home","menu_title":"Dashboard","menu_icon":"bx-home-circle","active":true},{"menu_title":"User Management","menu_icon":"bxs-user-circle","child_routes":[{"name":"users.index","menu_title":"User","active":false},{"name":"roles.index","menu_title":"Role","active":false}],"active":false},{"menu_title":"Task Management","menu_icon":"bxs-notepad","child_routes":[{"name":"tasks.index","menu_title":"Task","active":false}],"active":false}]}]');
 
 /***/ })
 
