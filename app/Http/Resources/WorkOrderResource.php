@@ -19,11 +19,14 @@ class WorkOrderResource extends JsonResource
         $data['created_at'] = $this->created_at->format('Y-m-d H:i:s');
         $data['updated_at'] = $this->updated_at->format('Y-m-d H:i:s');
 
-        $data['work_order_items'] = WorkOrderItemResource::collection($this->whenLoaded('Work_order_items'));
+        $data['work_order_items'] = WorkOrderItemResource::collection($this->whenLoaded('work_order_items'));
         $data['priority'] = new PriorityResource($this->whenLoaded('priority'));
+        $data['location'] = new LocationResource($this->whenLoaded('location'));
         $data['task_category'] = new TaskCategoryResource($this->whenLoaded('task_category'));
-        $data['finish_by'] = new UserTransformer($this->whenLoaded('finish_by'));
-        $data['start_by'] = new UserTransformer($this->whenLoaded('start_by'));
+        $data['user_finished'] = new UserTransformer($this->whenLoaded('user_finished'));
+        $data['user_started'] = new UserTransformer($this->whenLoaded('user_started'));
+        $data['assignees'] = WorkOrderAssigneeResource::collection($this->whenLoaded('assignees'));
+        $data['work_order_logs'] = WorkOrderLogResource::collection($this->whenLoaded('work_order_logs'));
 
         return $data;
     }

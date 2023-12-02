@@ -6,6 +6,7 @@ import RoleRoutes from "./modules/Role/RoleRoutes";
 import DashboardRoutes from "./modules/Dashboard/DashboardRoutes";
 import TaskRoutes from "./modules/Task/TaskRoutes";
 import TaskCategoryRoutes from "./modules/TaskCategory/TaskCategoryRoutes";
+import WorkorderRoutes from "./modules/Workorder/WorkorderRoutes";
 
 
 Vue.use(VueRouter);
@@ -16,6 +17,7 @@ const routes = [
     ...RoleRoutes,
     ...TaskRoutes,
     ...TaskCategoryRoutes,
+    ...WorkorderRoutes,
 ];
 
 const router = new VueRouter({

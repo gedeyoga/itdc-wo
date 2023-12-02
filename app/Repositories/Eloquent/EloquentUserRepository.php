@@ -35,7 +35,11 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
             });
         }
 
-        return $users->paginate($request->get('per_page' , 10));
+        if(!is_null($request->get('per_page'))) {
+            return $users->paginate($request->get('per_page', 10));
+        }
+
+        return $users->get();
     }
 
     public function createUser(array $data)
@@ -49,7 +53,7 @@ class EloquentUserRepository extends EloquentBaseRepository implements UserRepos
             $user->assignRole($data['role']);
         }
 
-        event(new UserWasCreated());
+        event(new UserWasCreated($user));
 
         return $user;
 

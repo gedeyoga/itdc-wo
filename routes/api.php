@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PriorityController;
@@ -62,6 +63,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/{task_category}', [TaskCategoryController::class, 'store'])->name('destroy');
     });
 
+    //Location
+    Route::group(['prefix' => 'locations', 'as' => 'api.locations.'], function () {
+        Route::get('/', [LocationController::class, 'list'])->name('list');
+        Route::post('/', [LocationController::class, 'store'])->name('store');
+        Route::put('/{location}', [LocationController::class, 'update'])->name('update');
+        Route::get('/{location}', [LocationController::class, 'show'])->name('show');
+        Route::delete('/{location}', [LocationController::class, 'store'])->name('destroy');
+    });
+
     //Priorities
     Route::group(['prefix' => 'priorities', 'as' => 'api.priorities.'], function () {
         Route::get('/', [PriorityController::class, 'list'])->name('list');
@@ -79,6 +89,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/{work_order}', [WorkOrderController::class, 'destroy'])->name('destroy');
 
         Route::post('/{work_order}/status', [WorkOrderController::class, 'updateStatus'])->name('update-status');
+        Route::post('/{work_order}/task', [WorkOrderController::class, 'updateItem'])->name('update-item');
     });
 
 

@@ -75,6 +75,7 @@ if (base_url) {
 }
 Vue.prototype.$url = base_url;
 Vue.prototype.$csrfToken = token;
+Vue.prototype.$api_token = userApiToken;
 
 /**
  * The following block of code may be used to automatically register your

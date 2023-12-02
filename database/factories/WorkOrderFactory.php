@@ -25,6 +25,7 @@ class WorkOrderFactory extends Factory
             'priority_id' => $this->faker->randomDigitNotNull(), 
             'status' => 'pending', 
             'date' => date('Y-m-d H:i:s'), 
+            'location_id' => $this->faker->randomDigitNotNull(), 
             'start_at' => null, 
             'start_by' => null, 
             'finish_at' => null, 

@@ -30,7 +30,9 @@ class UpdateWorkOrderRequest extends FormRequest
             'priority_id' => ['required'],
             'date' => ['required', 'string', 'date'],
             'work_order_items.*.name' => ['required', 'string'],
-            'work_order_items.*.has_media' => ['required', 'string'],
+            'work_order_items.*.has_media' => ['required'],
+            'assignees.*.work_order_id' => ['required'],
+            'assignees.*.user_id' => ['required'],
         ];
     }
 }

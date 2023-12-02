@@ -2,6 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\WorkorderCreated;
+use App\Events\WorkOrderFinished;
+use App\Events\WorkOrderPending;
+use App\Events\WorkOrderProgress;
+use App\Events\WorkorderUpdated;
+use App\Listeners\WorkorderCreatedListener;
+use App\Listeners\WorkorderFinishListener;
+use App\Listeners\WorkorderProgressListener;
+use App\Listeners\WorkorderUpdatedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +26,22 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        WorkorderCreated::class => [
+            WorkorderCreatedListener::class,
+        ],
+        WorkorderUpdated::class => [
+            WorkorderUpdatedListener::class,
+        ],
+        WorkOrderProgress::class => [
+            WorkorderProgressListener::class,
+        ],
+        WorkOrderFinished::class => [
+            WorkorderFinishListener::class,
+        ],
+        WorkOrderPending::class => [
+            
         ],
     ];
 

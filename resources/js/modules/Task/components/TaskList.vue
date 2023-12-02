@@ -295,8 +295,10 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch('fetchPriorities');
-        this.$store.dispatch('fetchTaskCategories');
+        this.$nextTick().then(() => {
+            this.$store.dispatch('fetchPriorities');
+            this.$store.dispatch('fetchTaskCategories');
+        })
 
         this.fetchData();
     },

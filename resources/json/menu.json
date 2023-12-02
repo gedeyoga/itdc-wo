@@ -9,6 +9,12 @@
                 "active": true
             },
             {
+                "name": "work-order.list",
+                "menu_title": "Work Order",
+                "menu_icon": "bxs-user-circle",
+                "active": false
+            },
+            {
                 "menu_title": "User Management",
                 "menu_icon": "bxs-user-circle",
                 "child_routes": [

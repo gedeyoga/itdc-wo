@@ -12,8 +12,10 @@ class WorkOrder extends Model
 {
     use HasFactory, AutoNumberTrait;
 
+    protected $table = 'work_orders';
+    
     protected $fillable = [
-        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by'
+        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id'
     ];
 
     public function getAutoNumberOptions()
@@ -45,18 +47,33 @@ class WorkOrder extends Model
         return $this->belongsTo(TaskCategory::class);
     }
 
-    public function start_by()
+    public function user_started()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'start_by');
     }
 
-    public function finish_by()
+    public function user_finished()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'finish_by');
     }
 
     public function work_order_items()
     {
         return $this->hasMany(WorkOrderItem::class , 'work_order_id');
+    }
+
+    public function assignees()
+    {
+        return $this->hasMany(WorkOrderAssignee::class, 'work_order_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function work_order_logs()
+    {
+        return $this->hasMany(WorkOrderLog::class , 'work_order_id')->orderBy('id', 'desc');
     }
 }

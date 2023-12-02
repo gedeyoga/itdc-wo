@@ -14,6 +14,8 @@ class WorkOrderItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $data = parent::toArray($request);
+        $data['media'] = $this->getFirstMedia('media') ? $this->getFirstMedia('media') : null;
+        return $data;
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Events\WorkOrderCancel;
+use App\Events\WorkorderCreated;
 use App\Events\WorkOrderFinished;
 use App\Events\WorkOrderPending;
 use App\Events\WorkOrderProgress;
+use App\Events\WorkorderUpdated;
 use App\Models\Task;
 use App\Models\WorkOrder;
 use App\Repositories\WorkOrderItemRepository;
@@ -16,7 +19,7 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
     public function createWorkOrder(array $data, array $items)
     {
         //status hanya bisa dirubah pada fungsi statusChanged
-        $this->removeStatusInArray($data);
+        $data = $this->removeStatusInArray($data);
 
         $work_item_repo = app(WorkOrderItemRepository::class);
 
@@ -27,13 +30,15 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
             $work_item_repo->createItem($item);   
         }
 
+        event(new WorkorderCreated($work_order));
+
         return $work_order;
     }
 
     public function updateWorkOrder(WorkOrder $work_order, array $data, array $items)
     {
         //status hanya bisa dirubah pada fungsi statusChanged
-        $this->removeStatusInArray($data);
+        $data = $this->removeStatusInArray($data);
 
         $work_item_repo = app(WorkOrderItemRepository::class);
         $model = $this->update($work_order , $data);
@@ -54,6 +59,8 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
             }
         }
 
+        event(new WorkorderUpdated($model));
+
         return $model->refresh();
     }
 
@@ -73,6 +80,25 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
 
         ->when(isset($params['task_category_id']) , function($q) use ($params) {
             return $q->where('task_category_id', $params['task_category_id']);
+        })
+
+        ->when(isset($params['date']) , function($q) use ($params) {
+            return $q->whereBetween('date', $params['date']);
+        })
+
+        ->when(isset($params['status']) , function($q) use ($params) {
+            return $q->where('status', $params['status']);
+        })
+
+        ->when(isset($params['user_id']) , function($q) use ($params) {
+            return $q->whereHas('assignees', fn($q) => $q->where('user_id' , $params['user_id']));
+        })
+
+        ->when(isset($params['search']) , function($q) use ($params) {
+            return $q->where(function($q) use ($params){
+                $q->where('name' , 'like' , '%'.$params['search'].'%')
+                    ->orWhere('code' , 'like' , '%'.$params['search'].'%');
+            });
         })
 
         ->orderBy('created_at', 'desc');
@@ -102,6 +128,8 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
 
             event(new WorkOrderFinished($model));
 
+        } else if($model->status == 'cancel') {
+            event(new WorkOrderCancel($model));
         };
 
         return $model;
@@ -113,6 +141,8 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         if (isset($data['status'])) {
             unset($data['status']);
         }
+
+        return $data;
     }
     
 }

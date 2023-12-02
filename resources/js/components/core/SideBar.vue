@@ -141,10 +141,7 @@ export default {
           .routes
           .forEach((group) => {
             group.group_menu.forEach((menu, i) => {
-              menu.active = (i === index);
-
-              
-                console.log(index, keySubmenu);
+              menu.active = (i === index); 
               if(menu.child_routes && menu.child_routes.length) {
                 menu.child_routes.forEach((submenu, key) => submenu.active = ( i === index && key === keySubmenu));
               }
@@ -153,12 +150,28 @@ export default {
     }
   },
   mounted() {
-    console.log(routes);
     this.$nextTick().then(() => {
       let main = document.createElement("script");
         main.setAttribute("defer", "");
         main.setAttribute("src", "assets/main.js");
         document.body.appendChild(main);
+
+        this.sideBarLinks.routes.forEach((group, g) => {
+        group.group_menu.forEach((menu, index) => {
+          
+          if(menu.hasOwnProperty('child_routes')) {
+            menu.child_routes.forEach((subMenu, key) => {
+              if(subMenu.name == this.$route.name) {
+                this.toggleMenu(index, key);
+              }
+            })
+          }else {
+            if(menu.name == this.$route.name) {
+              this.toggleMenu(index);
+            }
+          }
+        })
+      })
     })
   },
 }
