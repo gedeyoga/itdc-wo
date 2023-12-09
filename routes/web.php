@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/priorities' , [PriorityController::class, 'index'])->name('priorities.list');
 
     Route::get('/work-order' , [WorkOrderController::class, 'index'])->name('work-order.list');
+    Route::get('/work-order/scan', [WorkOrderController::class, 'scan'])->name('work-order.scan');
 });
 
 Auth::routes();

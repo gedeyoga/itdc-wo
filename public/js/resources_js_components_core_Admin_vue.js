@@ -62,52 +62,6 @@ __webpack_require__(/*! ../../components.js */ "./resources/js/components.js");
 
 /***/ }),
 
-/***/ "./resources/js/components/mixin/MainData.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/mixin/MainData.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      user: window.admin_panel.user
-    };
-  },
-  methods: {
-    previewImage: function previewImage(url_image) {
-      this.$imagePreview({
-        initIndex: 0,
-        images: url_image,
-        zIndex: 999999999999999
-      });
-    },
-    hasAccess: function hasAccess(permission) {
-      var roles = this.user.roles.find(function (item) {
-        return true;
-      });
-      var data_permission = permission.split('.');
-      var module = data_permission[0];
-      var permission_list = roles.permissions[module];
-      if (permission_list) {
-        var data = permission_list.find(function (item) {
-          return item.name == permission;
-        });
-        if (data) {
-          return data.allow;
-        }
-      }
-      return false;
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/mixins.js":
 /*!********************************!*\
   !*** ./resources/js/mixins.js ***!

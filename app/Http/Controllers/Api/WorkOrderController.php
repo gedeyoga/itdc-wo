@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateWorkOrderRequest;
+use App\Http\Requests\TaskProgressRequest;
 use App\Http\Requests\UpdateWorkOrderRequest;
 use App\Http\Resources\WorkOrderItemResource;
 use App\Http\Resources\WorkOrderResource;
@@ -152,6 +153,34 @@ class WorkOrderController extends Controller
         return response()->json([
             'message' => 'Subtask updated successfuly',
             'data' => new WorkOrderItemResource($wo_item)
+        ]);
+    }
+
+    public function progressTask(TaskProgressRequest $request)
+    {
+        $data = $request->except(['id' , 'created_at' , 'updated_at']);
+        $items = $request->get('task_items', []);
+        $assingees = $request->get('assignees', []);
+        array_push( $assingees , ['user_id' => $request->user()->id]);
+        $data['date'] = date('Y-m-d H:i:s');        
+
+        DB::beginTransaction();
+        try {
+            $work_order = $this->workorder_repo->createWorkOrder($data, $items);
+            $this->workorder_assignee_repo->assgineeWorkOrder($work_order, $assingees);
+            $this->workorder_repo->statusChanged($work_order, 'progress');
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Success Progress Work Order',
+            'data' => new WorkOrderResource($work_order)
         ]);
     }
 

@@ -18,7 +18,11 @@ class TaskResource extends JsonResource
         $data['priority'] = new PriorityResource($this->whenLoaded('priority'));
         $data['task_category'] = new PriorityResource($this->whenLoaded('task_category'));
         $data['task_items'] = new TaskItemResource($this->whenLoaded('task_items'));
-        
+        $data['barcode'] = $this->getMedia('barcode')->count() == 1 ? $this->getMedia('barcode')->first() : null;
+        $data['created_at'] = $this->created_at->format('Y-m-d H:i:s');
+        $data['updated_at'] = $this->updated_at->format('Y-m-d H:i:s');
+
         return $data;
+        
     }
 }

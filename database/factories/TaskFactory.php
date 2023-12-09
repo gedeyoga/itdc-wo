@@ -20,6 +20,7 @@ class TaskFactory extends Factory
             'description' => $this->faker->sentence(), 
             'task_category_id' => $this->faker->randomDigitNotZero(), 
             'priority_id' => $this->faker->randomDigitNotZero(),
+            'location_id' => $this->faker->randomDigitNotZero(),
         ];
     }
 }

@@ -14,19 +14,31 @@ class CreateWorkOrdersTable extends Migration
     public function up()
     {
         Schema::create('work_orders', function (Blueprint $table) {
+            $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
             $table->string('description');
             $table->unsignedBigInteger('task_category_id');
             $table->unsignedBigInteger('priority_id');
-            $table->enum('status' , ['pending', 'progress', 'finish'])->default('pending');
+
+            if ($driver == 'sqlite') {
+                $table->unsignedBigInteger('location_id')->default(null)->after('priority_id');
+                $table->enum('status', ['pending', 'progress', 'finish' , 'cancel'])->default('pending');
+            } else {
+                $table->enum('status' , ['pending', 'progress', 'finish'])->default('pending');
+            }
+            
             $table->dateTime('date');
             $table->dateTime('start_at')->nullable();
             $table->unsignedBigInteger('start_by')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->unsignedBigInteger('finish_by')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
+            
+            
+
             $table->timestamps();
 
             $table->foreign('task_category_id')->references('id')->on('task_categories');

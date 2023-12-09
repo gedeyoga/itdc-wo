@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Events\TaskCreated;
+use App\Listeners\TaskCreatedListener;
 use App\Models\Priority;
 use App\Models\Task;
 use App\Models\TaskCategory;
@@ -9,6 +11,7 @@ use App\Repositories\TaskRepository;
 use Database\Seeders\PrioritySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class TaskRepositoryTest extends TestCase
@@ -43,10 +46,17 @@ class TaskRepositoryTest extends TestCase
             ],
         ];
 
+        Event::fake();
         $task = $task_repo->createTask($data, $items);
+
+        Event::assertDispatched(TaskCreated::class, function($event) use ($task) {
+            (new TaskCreatedListener())->handle($event);
+            return $task->id = $event->task->id;
+        });
 
         $this->assertCount(2, $task->task_items);
         $this->assertEquals($data['name'], $task->name);
+        $this->assertCount(1, $task->getMedia('barcode'));
 
     }
 

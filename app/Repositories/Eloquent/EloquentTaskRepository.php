@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Events\TaskCreated;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 
@@ -13,6 +14,8 @@ class EloquentTaskRepository extends EloquentBaseRepository implements TaskRepos
         $task = $this->create($data);
 
         $task->task_items()->createMany($items);
+
+        event(new TaskCreated($task));
 
         return $task;
     }

@@ -54,8 +54,6 @@ class LoginController extends Controller
 
     public function authenticated(Request $request , $user) 
     {
-        $user->tokens()->delete();
-
         return response()->json([
             'message' => 'Login Berhasil!',
             'data' => [

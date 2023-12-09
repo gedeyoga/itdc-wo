@@ -25,6 +25,8 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
 
         $work_order = $this->create($data);
 
+        $this->statusChanged($work_order, 'pending');
+
         foreach ($items as $item) {
             $item['work_order_id'] = $work_order->id;
             $work_item_repo->createItem($item);   

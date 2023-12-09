@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\TaskCreated;
 use App\Events\WorkorderCreated;
 use App\Events\WorkOrderFinished;
 use App\Events\WorkOrderPending;
 use App\Events\WorkOrderProgress;
 use App\Events\WorkorderUpdated;
+use App\Listeners\TaskCreatedListener;
 use App\Listeners\WorkorderCreatedListener;
 use App\Listeners\WorkorderFinishListener;
 use App\Listeners\WorkorderProgressListener;
@@ -43,6 +45,10 @@ class EventServiceProvider extends ServiceProvider
         WorkOrderPending::class => [
             
         ],
+
+        TaskCreated::class => [
+            TaskCreatedListener::class
+        ]
     ];
 
     /**

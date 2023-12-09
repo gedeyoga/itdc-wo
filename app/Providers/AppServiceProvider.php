@@ -32,6 +32,7 @@ use App\Repositories\WorkOrderAssigneeRepository;
 use App\Repositories\WorkOrderItemRepository;
 use App\Repositories\WorkOrderLogRepository;
 use App\Repositories\WorkOrderRepository;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -121,6 +122,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }

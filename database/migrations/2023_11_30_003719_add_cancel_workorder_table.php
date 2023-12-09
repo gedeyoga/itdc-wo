@@ -13,7 +13,10 @@ class AddCancelWorkorderTable extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE work_orders MODIFY `status` ENUM('pending','progress','finish','cancel') DEFAULT 'pending'");
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+        if($driver != 'sqlite') {
+            DB::statement("ALTER TABLE work_orders MODIFY `status` ENUM('pending','progress','finish','cancel') DEFAULT 'pending'");
+        }
     }
 
     /**
@@ -23,6 +26,9 @@ class AddCancelWorkorderTable extends Migration
      */
     public function down()
     {
-        DB::statement("ALTER TABLE work_orders MODIFY `status` ENUM('pending','progress','finish') DEFAULT 'pending'");
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+        if($driver != 'sqlite') {
+            DB::statement("ALTER TABLE work_orders MODIFY `status` ENUM('pending','progress','finish') DEFAULT 'pending'");
+        }
     }
 }

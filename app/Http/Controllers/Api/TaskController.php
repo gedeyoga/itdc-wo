@@ -61,4 +61,10 @@ class TaskController extends Controller
             'message' => 'Berhasil menghapus task'
         ]);
     }
+
+    public function show(Task $task)
+    {
+        $task->load(['priority',  'task_category', 'task_items']);
+        return new TaskResource($task);
+    }
 }

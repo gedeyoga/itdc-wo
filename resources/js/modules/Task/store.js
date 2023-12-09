@@ -4,16 +4,23 @@ export default {
     state: () => {
         return {
             tasks: [],
+            task: {},
         };
     },
     mutations: {
         setTasks(state, data) {
             state.tasks = data;
         },
+        setTask(state, data) {
+            state.task = data;
+        },
     },
     getters: {
         tasks: (state) => {
             return state.tasks;
+        },
+        task: (state) => {
+            return state.task;
         },
     },
 
@@ -33,5 +40,21 @@ export default {
                     });
             });
         },
+
+        findTask({commit} , task_id) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(route("api.task.show" , {
+                        task: task_id,
+                    }))
+                    .then((response) => {
+                        commit("setTask", response.data.data);
+                        resolve(response);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        }
     },
 };

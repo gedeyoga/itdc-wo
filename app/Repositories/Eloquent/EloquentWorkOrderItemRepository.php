@@ -7,6 +7,7 @@ use App\Models\WorkOrderItem;
 use App\Repositories\WorkOrderItemRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class EloquentWorkOrderItemRepository extends EloquentBaseRepository implements WorkOrderItemRepository
 {
@@ -16,7 +17,8 @@ class EloquentWorkOrderItemRepository extends EloquentBaseRepository implements 
         $work_order_item = $this->create($data);
 
         if($media instanceof UploadedFile) {
-            $work_order_item->addMedia($media)->toMediaCollection('media');
+            $name = Str::uuid() . '.' . $media->extension();
+            $work_order_item->addMedia($media)->usingFileName($name)->toMediaCollection('media');
         }
 
         return $work_order_item;
@@ -27,7 +29,8 @@ class EloquentWorkOrderItemRepository extends EloquentBaseRepository implements 
         $work_order_item = $this->update($work_order_item, $data);
 
         if ($media instanceof UploadedFile) {
-            $work_order_item->addMedia($media)->toMediaCollection('media');
+            $name = Str::uuid() . '.' . $media->extension();
+            $work_order_item->addMedia($media)->usingFileName($name)->toMediaCollection('media');
         }
 
         return $work_order_item;

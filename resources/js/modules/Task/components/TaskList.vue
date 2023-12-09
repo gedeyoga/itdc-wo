@@ -95,16 +95,26 @@
                     ref="pageTable"
                     v-loading.body="tableIsLoading"
                 >
-                    <el-table-column label="No" width="90">
+                    <el-table-column label="No" width="50">
                         <template slot-scope="scope">
                             {{ meta.per_page * (meta.current_page - 1) + scope.$index + 1 }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="name" width="80" label="QR Code">
+                        <template slot-scope="scope">
+                             <el-image
+                                style="width: 70px; height: 70px"
+                                :src="scope.row.barcode ? scope.row.barcode.original_url : '#'"
+                                :preview-src-list="scope.row.barcode ? [scope.row.barcode.original_url] : [] "
+                                fit="fill">
+                            </el-image>
                         </template>
                     </el-table-column>
                     <el-table-column prop="name" label="Task">
                     </el-table-column>
                     <el-table-column prop="priority_id" label="Priority">
                         <template slot-scope="scope">
-                            {{ scope.row.priority.name }}
+                            <priority-component :status="scope.row.priority.name.toLowerCase()"></priority-component>
                         </template>
                     </el-table-column>
                     <el-table-column prop="task_category_id" label="Kategori">
@@ -163,10 +173,12 @@
 import _ from "lodash";
 import { mapState } from "vuex";
 import DialogTaskForm from './DialogTaskForm.vue';
+import PriorityComponent from '../../Workorder/components/PriorityComponent.vue';
 
 export default {
     components:{
         DialogTaskForm,
+        PriorityComponent
     },
     data() {
         return {
@@ -296,8 +308,11 @@ export default {
 
     mounted() {
         this.$nextTick().then(() => {
-            this.$store.dispatch('fetchPriorities');
-            this.$store.dispatch('fetchTaskCategories');
+            Promise.all([
+                this.$store.dispatch('fetchLocations'),
+                this.$store.dispatch('fetchPriorities'),
+                this.$store.dispatch('fetchTaskCategories'),
+            ])
         })
 
         this.fetchData();

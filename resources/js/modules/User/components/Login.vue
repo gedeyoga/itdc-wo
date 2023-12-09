@@ -217,8 +217,10 @@ export default {
                 ],
             },
             loading: false,
+            prevRoute: null,
         };
     },
+
     methods: {
         onSubmit() {
             this.$refs["auth"].validate((valid) => {

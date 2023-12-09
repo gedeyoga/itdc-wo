@@ -15,6 +15,9 @@
             class="navbar-nav-right d-flex align-items-center"
             id="navbar-collapse"
         >
+            <slot name="navbar-right">
+                
+            </slot>
             <!-- Search -->
             <!-- <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
@@ -43,6 +46,7 @@
                     >
                 </li> -->
 
+                <li>{{ user.name }}</li>
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                     <a
@@ -132,7 +136,12 @@
     </nav>
 </template>
 <script>
+import MainData from "../mixin/MainData";
+
 export default {
+    mixins:[
+        MainData,
+    ],
     methods: {
         logout() {
             axios

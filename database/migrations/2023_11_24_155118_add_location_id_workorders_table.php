@@ -13,9 +13,13 @@ class AddLocationIdWorkordersTable extends Migration
      */
     public function up()
     {
-        Schema::table('work_orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('location_id')->default(null)->after('priority_id');
-        });
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        if($driver != 'sqlite') {
+            Schema::table('work_orders', function (Blueprint $table) {
+                $table->unsignedBigInteger('location_id')->default(null)->after('priority_id');
+            });
+        }
     }
 
     /**
@@ -25,8 +29,12 @@ class AddLocationIdWorkordersTable extends Migration
      */
     public function down()
     {
-        Schema::table('work_orders', function (Blueprint $table) {
-            $table->dropColumn(['location_id']);
-        });
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        if($driver != 'sqlite') {
+            Schema::table('work_orders', function (Blueprint $table) {
+                $table->dropColumn(['location_id']);
+            });
+        }
     }
 }

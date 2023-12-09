@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Milon\Barcode\DNS2D;
+use \Milon\Barcode\DNS1D;
 
 class HomeController extends Controller
 {

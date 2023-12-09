@@ -14,11 +14,18 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
+            $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+            
             $table->id();
             $table->string('name');
             $table->string('description');
             $table->unsignedBigInteger('task_category_id');
             $table->unsignedBigInteger('priority_id');
+
+            if($driver == 'sqlite') {
+                $table->unsignedBigInteger('location_id');
+            }
+
             $table->timestamps();
             $table->softDeletes();
 

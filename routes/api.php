@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'work-order', 'as' => 'api.work-order.'], function () {
         Route::get('/', [WorkOrderController::class, 'list'])->name('list');
+        Route::post('/progress-task', [WorkOrderController::class, 'progressTask'])->name('progress-task');
         Route::post('/', [WorkOrderController::class, 'store'])->name('store');
         Route::put('/{work_order}', [WorkOrderController::class, 'update'])->name('update');
         Route::get('/{work_order}', [WorkOrderController::class, 'show'])->name('show');

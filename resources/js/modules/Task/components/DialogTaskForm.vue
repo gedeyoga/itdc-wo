@@ -105,6 +105,24 @@
                     </el-select>
                 </el-form-item>
             </div>
+            <div class="col-lg-6">
+                <el-form-item label="Location" prop="location_id">
+                    <el-select
+                        class="w-100"
+                        clearable
+                        v-model="task.location_id"
+                        placeholder="Choose Location"
+                    >
+                        <el-option
+                            v-for="location in locations"
+                            :key="location.id"
+                            :label="location.name"
+                            :value="location.id"
+                        >
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </div>
         </div>
        
     </el-form>
@@ -131,6 +149,7 @@ export default {
                 description: '',
                 task_category_id: '',
                 priority_id: '',
+                location_id: '',
                 task_items: [
                     {
                         name: '',
@@ -167,6 +186,13 @@ export default {
                         message: 'Category is required'
                     },
                 ],
+                location_id: [
+                    {
+                        required: true,
+                        trigger: ['blur'],
+                        message: 'Location is required'
+                    },
+                ],
             }
         }
     },
@@ -175,6 +201,7 @@ export default {
          ...mapState({
             priorities: (state) => state.Priority.priorities,
             task_categories: (state) => state.TaskCategory.task_categories,
+            locations: (state) => state.Location.locations,
         })
     },
 

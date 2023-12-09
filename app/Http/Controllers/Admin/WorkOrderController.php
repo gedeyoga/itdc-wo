@@ -11,4 +11,9 @@ class WorkOrderController extends Controller
     {
         return view('layouts.main');
     }
+
+    public function scan(Request $request)
+    {
+        return view('layouts.main');
+    }
 }
