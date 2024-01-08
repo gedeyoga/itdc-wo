@@ -32,8 +32,11 @@ class WorkOrder extends Model
     {
         parent::boot();
 
-        static::creating(function($work_order) {;
-            $work_order->created_by = Auth::user()->id;
+        static::creating(function($work_order) {
+            $user = Auth::user();
+            if(!is_null($user)) {
+                $work_order->created_by = $user->id;
+            }
         }); 
     }
 
@@ -50,6 +53,11 @@ class WorkOrder extends Model
     public function user_started()
     {
         return $this->belongsTo(User::class , 'start_by');
+    }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class , 'created_by');
     }
 
     public function user_finished()

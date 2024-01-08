@@ -25,6 +25,7 @@ class WorkOrderResource extends JsonResource
         $data['task_category'] = new TaskCategoryResource($this->whenLoaded('task_category'));
         $data['user_finished'] = new UserTransformer($this->whenLoaded('user_finished'));
         $data['user_started'] = new UserTransformer($this->whenLoaded('user_started'));
+        $data['user_created'] = new UserTransformer($this->whenLoaded('user_created'));
         $data['assignees'] = WorkOrderAssigneeResource::collection($this->whenLoaded('assignees'));
         $data['work_order_logs'] = WorkOrderLogResource::collection($this->whenLoaded('work_order_logs'));
 

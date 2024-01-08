@@ -1,5 +1,15 @@
 <template>
     <div>
-       <h2>Dashboard</h2>
+       <dashboard-admin />
     </div>
 </template>
+
+<script>
+import DashboardAdmin from "./DashboardAdmin.vue";
+
+export default {
+    components:{
+        DashboardAdmin
+    },
+}
+</script>

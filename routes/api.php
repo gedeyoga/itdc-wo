@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PriorityController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TaskCategoryController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\TaskScheduleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkOrderController;
 use Illuminate\Http\Request;
@@ -63,6 +64,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/{task_category}', [TaskCategoryController::class, 'store'])->name('destroy');
     });
 
+    //Task Schedule
+    Route::group(['prefix' => 'task-schedules', 'as' => 'api.task-schedules.'], function () {
+        Route::get('/', [TaskScheduleController::class, 'list'])->name('list');
+        Route::post('/', [TaskScheduleController::class, 'store'])->name('store');
+        Route::put('/{task_schedule}', [TaskScheduleController::class, 'update'])->name('update');
+        Route::get('/{task_schedule}', [TaskScheduleController::class, 'show'])->name('show');
+        Route::delete('/{task_schedule}', [TaskScheduleController::class, 'destroy'])->name('destroy');
+    });
+
     //Location
     Route::group(['prefix' => 'locations', 'as' => 'api.locations.'], function () {
         Route::get('/', [LocationController::class, 'list'])->name('list');
@@ -83,6 +93,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'work-order', 'as' => 'api.work-order.'], function () {
         Route::get('/', [WorkOrderController::class, 'list'])->name('list');
+        Route::get('/overview', [WorkOrderController::class, 'overview'])->name('overview');
         Route::post('/progress-task', [WorkOrderController::class, 'progressTask'])->name('progress-task');
         Route::post('/', [WorkOrderController::class, 'store'])->name('store');
         Route::put('/{work_order}', [WorkOrderController::class, 'update'])->name('update');

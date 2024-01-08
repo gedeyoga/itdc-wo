@@ -41,6 +41,11 @@
                         "active": false
                     },
                     {
+                        "name": "task-schedules.list",
+                        "menu_title": "Schedule",
+                        "active": false
+                    },
+                    {
                         "name": "task-categories.index",
                         "menu_title": "Task Category",
                         "active": false

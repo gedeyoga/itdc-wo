@@ -12,6 +12,7 @@ use App\Models\Task;
 use App\Models\WorkOrder;
 use App\Repositories\WorkOrderItemRepository;
 use App\Repositories\WorkOrderRepository;
+use Illuminate\Support\Facades\DB;
 
 class EloquentWorkOrderRepository extends EloquentBaseRepository implements WorkOrderRepository
 {
@@ -89,7 +90,11 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         })
 
         ->when(isset($params['status']) , function($q) use ($params) {
-            return $q->where('status', $params['status']);
+           if(!is_array($params['status'])) {
+                return $q->where('status', $params['status']);
+           }else{
+                return $q->whereIn('status', $params['status']);
+           }
         })
 
         ->when(isset($params['user_id']) , function($q) use ($params) {
@@ -145,6 +150,27 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         }
 
         return $data;
+    }
+
+    public function overview(array $params)
+    {
+        $datas = $this->model
+            ->select([
+                DB::raw("status"),
+                DB::raw("count(status) as amount"),
+            ])
+
+            ->when(isset($params['date']), function ($q) use ($params) {
+                return $q->whereBetween('date', $params['date']);
+            })
+
+            ->when(isset($params['user_id']), function ($q) use ($params) {
+                return $q->whereHas('assignees', fn ($q) => $q->where('user_id', $params['user_id']));
+            })
+
+            ->groupBy('status');
+
+        return $datas->get();
     }
     
 }

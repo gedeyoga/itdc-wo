@@ -7,6 +7,7 @@ import DashboardRoutes from "./modules/Dashboard/DashboardRoutes";
 import TaskRoutes from "./modules/Task/TaskRoutes";
 import TaskCategoryRoutes from "./modules/TaskCategory/TaskCategoryRoutes";
 import WorkorderRoutes from "./modules/Workorder/WorkorderRoutes";
+import TaskScheduleRoutes from "./modules/TaskSchedule/TaskScheduleRoutes";
 
 
 Vue.use(VueRouter);
@@ -18,6 +19,7 @@ const routes = [
     ...TaskRoutes,
     ...TaskCategoryRoutes,
     ...WorkorderRoutes,
+    ...TaskScheduleRoutes
 ];
 
 const router = new VueRouter({

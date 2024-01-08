@@ -2,7 +2,7 @@
     <el-dialog
         :title="workorder_data ? workorder_data.code : 'Loading..'"
         :visible.sync="show"
-        width="50%"
+        :width="isMobile() ? '90%' : '50%'"
         :close-on-click-modal="false">
 
         <detail-work-order 

@@ -15,5 +15,7 @@ interface WorkOrderRepository {
     public function list(array $params);
 
     public function statusChanged(WorkOrder $work_order, $status);
+    
+    public function overview(array $params);
 
 }

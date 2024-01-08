@@ -17,7 +17,7 @@ class CreateWorkorderLogTable extends Migration
             $table->id();
             $table->unsignedBigInteger('work_order_id');
             $table->string('log');
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
 
             $table->foreign('work_order_id')->references('id')->on('work_orders')->onDelete('cascade');

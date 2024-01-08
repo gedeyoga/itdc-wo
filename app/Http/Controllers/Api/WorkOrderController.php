@@ -94,6 +94,7 @@ class WorkOrderController extends Controller
             'task_category', 
             'user_started' , 
             'user_finished' , 
+            'user_created' , 
             'location', 
             'assignees.user' , 
             'work_order_logs.user_created'
@@ -181,6 +182,18 @@ class WorkOrderController extends Controller
         return response()->json([
             'message' => 'Success Progress Work Order',
             'data' => new WorkOrderResource($work_order)
+        ]);
+    }
+
+    public function overview(Request $request)
+    {
+        $datas = $this->workorder_repo->overview($request->all());
+
+        return response()->json([
+            'pending' => $datas->where('status' , 'pending')->count() == 1 ? $datas->where('status', 'pending')->first()->amount: 0,
+            'progress' => $datas->where('status' , 'progress')->count() == 1 ? $datas->where('status', 'progress')->first()->amount: 0,
+            'finish' => $datas->where('status' , 'finish')->count() == 1 ? $datas->where('status', 'finish')->first()->amount: 0,
+            'cancel' => $datas->where('status' , 'cancel')->count() == 1 ? $datas->where('status', 'cancel')->first()->amount: 0,
         ]);
     }
 

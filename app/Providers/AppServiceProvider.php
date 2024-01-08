@@ -7,6 +7,10 @@ use App\Models\Priority;
 use App\Models\Role;
 use App\Models\Task;
 use App\Models\TaskCategory;
+use App\Models\TaskSchedule;
+use App\Models\TaskScheduleDay;
+use App\Models\TaskScheduleMonth;
+use App\Models\TaskScheduleYear;
 use App\Models\User;
 use App\Models\WorkOrder;
 use App\Models\WorkOrderAssignee;
@@ -17,6 +21,10 @@ use App\Repositories\Eloquent\EloquentPriorityRepository;
 use App\Repositories\Eloquent\EloquentRoleRepository;
 use App\Repositories\Eloquent\EloquentTaskCategoryRepository;
 use App\Repositories\Eloquent\EloquentTaskRepository;
+use App\Repositories\Eloquent\EloquentTaskScheduleDayRepository;
+use App\Repositories\Eloquent\EloquentTaskScheduleMonthRepository;
+use App\Repositories\Eloquent\EloquentTaskScheduleRepository;
+use App\Repositories\Eloquent\EloquentTaskScheduleYearRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderAssigneeRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
@@ -27,6 +35,10 @@ use App\Repositories\PriorityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\TaskCategoryRepository;
 use App\Repositories\TaskRepository;
+use App\Repositories\TaskScheduleDayRepository;
+use App\Repositories\TaskScheduleMonthRepository;
+use App\Repositories\TaskScheduleRepository;
+use App\Repositories\TaskScheduleYearRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WorkOrderAssigneeRepository;
 use App\Repositories\WorkOrderItemRepository;
@@ -113,6 +125,34 @@ class AppServiceProvider extends ServiceProvider
 
             return $repository;
         });
+
+        $this->app->bind(TaskScheduleRepository::class, function () {
+
+            $repository = new EloquentTaskScheduleRepository(new TaskSchedule());
+
+            return $repository;
+        });
+
+        $this->app->bind(TaskScheduleDayRepository::class, function () {
+
+            $repository = new EloquentTaskScheduleDayRepository(new TaskScheduleDay());
+
+            return $repository;
+        });
+
+        $this->app->bind(TaskScheduleMonthRepository::class, function () {
+
+            $repository = new EloquentTaskScheduleMonthRepository(new TaskScheduleMonth());
+
+            return $repository;
+        });
+
+        $this->app->bind(TaskScheduleYearRepository::class, function () {
+
+            $repository = new EloquentTaskScheduleYearRepository(new TaskScheduleYear());
+
+            return $repository;
+        });
     }
 
     /**
@@ -122,6 +162,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        if (env('NGROK') == true) {
+            URL::forceScheme('https');
+        }
     }
 }

@@ -19,9 +19,14 @@ class WorkOrderLog extends Model
     {
         parent::boot();
 
-        static::creating(function ($log) {;
-            $log->created_by = Auth::user()->id;
-        });
+        static::creating(function ($log) {
+            $user = Auth::user();
+            if (!is_null($user)) {
+                $log->created_by = $user->id;
+            }else {
+                $log->created_by = WorkOrder::find($log->work_order_id)->created_by;
+            }
+        }); 
     }
 
     public function workorder()
