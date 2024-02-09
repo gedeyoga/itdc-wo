@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PriorityController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TaskCategoryController;
@@ -45,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/work-order' , [WorkOrderController::class, 'index'])->name('work-order.list');
     Route::get('/work-order/scan', [WorkOrderController::class, 'scan'])->name('work-order.scan');
+
+    Route::get('/report/daily', [ReportController::class, 'daily'])->name('report.daily');
 });
 
 Auth::routes();

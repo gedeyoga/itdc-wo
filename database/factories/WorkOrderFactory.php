@@ -30,6 +30,7 @@ class WorkOrderFactory extends Factory
             'start_by' => null, 
             'finish_at' => null, 
             'finish_by' => null, 
+            'operational_activities' => 'normal'
         ];
     }
 

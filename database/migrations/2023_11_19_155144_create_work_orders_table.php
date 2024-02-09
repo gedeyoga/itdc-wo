@@ -26,6 +26,7 @@ class CreateWorkOrdersTable extends Migration
             if ($driver == 'sqlite') {
                 $table->unsignedBigInteger('location_id')->default(null)->after('priority_id');
                 $table->enum('status', ['pending', 'progress', 'finish' , 'cancel'])->default('pending');
+                $table->enum('operational_activities', ['normal', 'daily', 'monthly', 'yearly'])->default('normal');
             } else {
                 $table->enum('status' , ['pending', 'progress', 'finish'])->default('pending');
             }

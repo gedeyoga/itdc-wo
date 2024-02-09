@@ -86,7 +86,10 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         })
 
         ->when(isset($params['date']) , function($q) use ($params) {
-            return $q->whereBetween('date', $params['date']);
+            return $q->whereBetween('date', [
+                date('Y-m-d 00:00:00' , strtotime($params['date'][0])),
+                date('Y-m-d 23:59:59' , strtotime($params['date'][1])),
+            ]);
         })
 
         ->when(isset($params['status']) , function($q) use ($params) {
@@ -171,6 +174,41 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
             ->groupBy('status');
 
         return $datas->get();
+    }
+
+    public function reportWorkOrderDaily($params)
+    {
+        $group_status = $this->model->select([
+            'work_orders.status',
+            DB::raw('count(id) as jumlah_status'),
+        ])->whereBetween('date' ,  $params['dates'])
+        ->groupBy('status')
+        ->get();
+
+        $group_assignees = $this->model->select([
+            'users.*',
+        ])
+        ->join('work_order_assignees', 'work_order_assignees.work_order_id' , 'work_orders.id')
+        ->join('users' , 'users.id' , 'work_order_assignees.user_id')
+        ->whereBetween('date',  $params['dates'])
+        ->groupBy('work_order_assignees.user_id')
+        ->get();
+
+        $group_locations = $this->model->select([
+            'locations.*',
+        ])
+        ->join('locations', 'locations.id', 'work_orders.location_id')
+        ->groupBy('work_orders.location_id')
+        ->whereBetween('date',  $params['dates'])
+        ->get();
+
+
+        return [
+            'group_status' => $group_status,
+            'group_assignees' => $group_assignees,
+            'group_locations' => $group_locations
+        ];
+    
     }
     
 }

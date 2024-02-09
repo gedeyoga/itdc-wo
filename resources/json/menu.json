@@ -6,13 +6,15 @@
                 "name": "home",
                 "menu_title": "Dashboard",
                 "menu_icon" : "bx-home-circle",
-                "active": true
+                "active": true,
+                "permissions": ["dashboard.dashboard-user" , "dashboard.dashboard-admin"]
             },
             {
                 "name": "work-order.list",
                 "menu_title": "Work Order",
                 "menu_icon": "bxs-user-circle",
-                "active": false
+                "active": false,
+                "permissions": ["workorder.workorder-list"]
             },
             {
                 "menu_title": "User Management",
@@ -21,15 +23,18 @@
                     {
                         "name": "users.index",
                         "menu_title": "User",
-                        "active": false
+                        "active": false,
+                        "permissions": ["user.user-list"]
                     },
                     {
                         "name": "roles.index",
                         "menu_title": "Role",
-                        "active": false
+                        "active": false,
+                        "permissions": ["role.role-list"]
                     }
                 ],
-                "active": false
+                "active": false,
+                "permissions": ["user.user-list", "role.role-list"]
             },
             {
                 "menu_title": "Task Management",
@@ -38,20 +43,38 @@
                     {
                         "name": "tasks.index",
                         "menu_title": "Task",
-                        "active": false
+                        "active": false,
+                        "permissions": ["task.task-list"]
                     },
                     {
                         "name": "task-schedules.list",
                         "menu_title": "Schedule",
-                        "active": false
+                        "active": false,
+                        "permissions": ["task-schedule.task-schedule-list"]
                     },
                     {
                         "name": "task-categories.index",
                         "menu_title": "Task Category",
-                        "active": false
+                        "active": false,
+                        "permissions": ["task-category.task-category-list"]
                     }
                 ],
-                "active": false
+                "active": false,
+                "permissions": ["task.task-list", "task-schedule.task-schedule-list" , "task-category.task-category-list"]
+            },
+            {
+                "menu_title": "Reports",
+                "menu_icon": "bxs-notepad",
+                "child_routes": [
+                    {
+                        "name": "report.daily",
+                        "menu_title": "Daily Report",
+                        "active": false,
+                        "permissions": ["report-daily.report-daily-list"]
+                    }
+                ],
+                "active": false,
+                "permissions": ["report-daily.report-daily-list"]
             }
         ]
     }

@@ -18,4 +18,6 @@ interface WorkOrderRepository {
     
     public function overview(array $params);
 
+    public function reportWorkOrderDaily($params);
+
 }

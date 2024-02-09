@@ -15,7 +15,7 @@ class WorkOrder extends Model
     protected $table = 'work_orders';
     
     protected $fillable = [
-        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id'
+        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id' , 'operational_activities'
     ];
 
     public function getAutoNumberOptions()

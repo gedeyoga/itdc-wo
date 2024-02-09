@@ -76,7 +76,7 @@
               </li>
 
               <template v-for="(menu, index) in group.group_menu" >
-                  <li :key="index" :class="[ 'menu-item', { 'active open': menu.active } ]" v-if="menu.child_routes && menu.child_routes.length">
+                  <li :key="index" :class="[ 'menu-item', { 'active open': menu.active } ]" v-if="menu.child_routes && menu.child_routes.length && checkPermissions(menu.permissions)">
 
                     <a :class="[ 'menu-link menu-toggle', { 'active ': menu.active } ]" href="javascript:void(0);">
                         <i :class="menu.menu_icon" class="menu-icon tf-icons bx"></i>
@@ -84,21 +84,23 @@
                     </a>
 
                     <ul class="menu-sub">
-                        <router-link 
-                          tag="li"
-                          v-for="(subMenu, key) in menu.child_routes"
-                          :key="key"
-                          :class="[ 'menu-item', { 'active': subMenu.active } ]"
-                          :to="{name: subMenu.name}">
-                          <a href="javascript:void(0);" class="menu-link"  @click="toggleMenu(index, key)">
-                              <span>{{subMenu.menu_title}}</span>
-                          </a>
-                        </router-link>
+                        <template  v-for="(subMenu, key) in menu.child_routes">
+                          <router-link 
+                            tag="li"
+                            v-if="checkPermissions(subMenu.permissions)"
+                            :key="key"
+                            :class="[ 'menu-item', { 'active': subMenu.active } ]"
+                            :to="{name: subMenu.name}">
+                            <a href="javascript:void(0);" class="menu-link"  @click="toggleMenu(index, key)">
+                                <span>{{subMenu.menu_title}}</span>
+                            </a>
+                          </router-link>
+                        </template>
                     </ul>
                   </li>
 
                   <router-link 
-                    v-else
+                    v-else-if="checkPermissions(menu.permissions)"
                     :key="index"
                     :to="{name: menu.name}"
                     tag="li"
@@ -147,6 +149,17 @@ export default {
               }
             });
           });
+    },
+
+    checkPermissions(permissions) {
+
+      let checkPermission = [];
+      
+      permissions.forEach((permission) => {
+        checkPermission.push(this.hasAccess(permission));
+      })
+
+      return checkPermission.includes(true);
     }
   },
   mounted() {

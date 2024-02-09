@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "autoprefixer": "10.4.5",
+        "chart.js": "^4.4.1",
         "form-backend-validation": "^2.4.0",
         "image-preview-vue": "^1.2.11",
         "jquery": "^3.7.1",

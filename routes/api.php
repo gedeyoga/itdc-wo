@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PriorityController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TaskCategoryController;
 use App\Http\Controllers\Api\TaskController;
@@ -102,6 +103,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::post('/{work_order}/status', [WorkOrderController::class, 'updateStatus'])->name('update-status');
         Route::post('/{work_order}/task', [WorkOrderController::class, 'updateItem'])->name('update-item');
+
+        Route::get('/report/daily' , [ReportController::class , 'reportSummaryDaily'])->name('report.daily');
     });
 
 
