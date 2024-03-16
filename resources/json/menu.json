@@ -71,10 +71,16 @@
                         "menu_title": "Daily Report",
                         "active": false,
                         "permissions": ["report-daily.report-daily-list"]
+                    },
+                    {
+                        "name": "report.monthly",
+                        "menu_title": "Monthly Report",
+                        "active": false,
+                        "permissions": ["report-monthly.report-monthly-list"]
                     }
                 ],
                 "active": false,
-                "permissions": ["report-daily.report-daily-list"]
+                "permissions": ["report-daily.report-daily-list" , "report-daily.report-monthly-list" ]
             }
         ]
     }

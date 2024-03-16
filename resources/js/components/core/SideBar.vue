@@ -163,10 +163,12 @@ export default {
     }
   },
   mounted() {
+
+  console.log(window.origin);
     this.$nextTick().then(() => {
       let main = document.createElement("script");
         main.setAttribute("defer", "");
-        main.setAttribute("src", "assets/main.js");
+        main.setAttribute("src", window.origin + "/assets/main.js");
         document.body.appendChild(main);
 
         this.sideBarLinks.routes.forEach((group, g) => {

@@ -509,6 +509,22 @@ export default {
             } catch (error) {
                 this.loadingSummary = false
             }
+        },
+
+        async fetchSummaryMonth() {
+            this.loadingSummary = true;
+            try {
+                const response = await axios.get(route('api.work-order.report.monthly') , {
+                    params: {
+                        date: this.filter.date[0],
+                    }
+                });
+
+                console.log(response.data);
+
+            } catch (error) {
+                this.loadingSummary = false
+            }
         }
     },
 
@@ -544,6 +560,7 @@ export default {
         })
         this.initChartJs();
         this.fetchData();
+        this.fetchSummaryMonth();
     },
 };
 </script>

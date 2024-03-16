@@ -35,4 +35,11 @@ class ReportController extends Controller
 
 
     }
+
+    public function reportWorkorderMontly(Request $request)
+    {
+        $datas = $this->work_order_repo->reportWorkOrderMonthly($request->all());
+
+        return UserTransformer::collection($datas);
+    }
 }

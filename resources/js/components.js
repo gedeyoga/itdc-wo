@@ -10,6 +10,8 @@ import StatusComponent from "./modules/Workorder/components/StatusComponent";
 // Vue.component("Navbar", () => import("./components/core/Navbar"));
 Vue.component("SideBar", SideBar);
 Vue.component("Navbar", Navbar);
+Vue.component("PriorityComponent", PriorityComponent);
+Vue.component("StatusComponent", StatusComponent);
 // Vue.component("Navbar", Navbar);
 // Vue.component("App", App);
 Vue.component(

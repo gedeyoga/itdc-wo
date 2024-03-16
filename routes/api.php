@@ -105,6 +105,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/{work_order}/task', [WorkOrderController::class, 'updateItem'])->name('update-item');
 
         Route::get('/report/daily' , [ReportController::class , 'reportSummaryDaily'])->name('report.daily');
+        Route::get('/report/monthly' , [ReportController::class , 'reportWorkorderMontly'])->name('report.monthly');
     });
 
 

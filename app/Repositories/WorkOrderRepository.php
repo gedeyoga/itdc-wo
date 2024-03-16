@@ -20,4 +20,6 @@ interface WorkOrderRepository {
 
     public function reportWorkOrderDaily($params);
 
+    public function reportWorkOrderMonthly($params);
+
 }

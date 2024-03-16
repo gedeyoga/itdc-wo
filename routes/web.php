@@ -48,6 +48,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/work-order/scan', [WorkOrderController::class, 'scan'])->name('work-order.scan');
 
     Route::get('/report/daily', [ReportController::class, 'daily'])->name('report.daily');
+    Route::get('export/report/daily', [ReportController::class, 'reportDailyPdf'])->name('report.daily');
+    
+    Route::get('/report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
+
 });
 
 Auth::routes();

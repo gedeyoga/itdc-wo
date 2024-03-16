@@ -9,6 +9,7 @@ use App\Events\WorkOrderPending;
 use App\Events\WorkOrderProgress;
 use App\Events\WorkorderUpdated;
 use App\Models\Task;
+use App\Models\User;
 use App\Models\WorkOrder;
 use App\Repositories\WorkOrderItemRepository;
 use App\Repositories\WorkOrderRepository;
@@ -209,6 +210,57 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
             'group_locations' => $group_locations
         ];
     
+    }
+
+    public function reportWorkOrderMonthly($params)
+    {
+        $user = new User();
+        $columns = ['users.*'];
+
+        $daysOfMonth = isset($params['date']) ? date('t' , strtotime($params['date'])) : date('t');
+        $month = isset($params['date']) ? date('Y-m' , strtotime($params['date'])) : date('Y-m');
+
+        for ($day=1; $day <= $daysOfMonth; $day++) { 
+            $date = date('Y-m-d' , strtotime($month . '-' . $day));
+
+            array_push(
+                $columns, 
+                DB::raw("
+                    (
+                        round(((
+                            SELECT 
+                                count(work_orders.id) as jumlah
+                            FROM `work_order_assignees`
+                                JOIN work_orders ON work_orders.id = work_order_assignees.work_order_id
+                            where 
+                                work_orders.date like '" . $date . "%' and 
+                                work_order_assignees.user_id = users.id and
+                                work_orders.status = 'finish'
+                            group by work_order_assignees.user_id	
+                        ) 
+                        /
+                        (
+                            SELECT 
+                                count(work_orders.id) as jumlah
+                            FROM `work_order_assignees`
+                                JOIN work_orders ON work_orders.id = work_order_assignees.work_order_id
+                            where 
+                                work_orders.date like '" . $date ."%' and 
+                                work_order_assignees.user_id = users.id
+                            group by work_order_assignees.user_id
+                        )) * 100)
+                    ) AS '" . $date . "'
+                ")
+            );
+        }
+
+        $user = $user->select($columns);
+
+        if(isset($params['per_page'])) {
+            return $user->paginate($params['per_page']);
+        }
+
+        return $user->get();
     }
     
 }

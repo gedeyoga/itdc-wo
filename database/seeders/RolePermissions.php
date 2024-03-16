@@ -52,6 +52,8 @@ class RolePermissions extends Seeder
             ['name' => 'workorder.workorder-create', 'guard_name' => 'sanctum'],
             ['name' => 'workorder.workorder-update', 'guard_name' => 'sanctum'],
             ['name' => 'workorder.workorder-delete', 'guard_name' => 'sanctum'],
+            ['name' => 'report-monthly.report-monthly-list', 'guard_name' => 'sanctum'],
+            ['name' => 'report-daily.report-daily-list', 'guard_name' => 'sanctum'],
         ];
 
         foreach ($permissions as $permission) {

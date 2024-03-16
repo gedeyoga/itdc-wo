@@ -171,6 +171,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
