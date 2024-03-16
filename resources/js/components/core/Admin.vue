@@ -12,7 +12,7 @@
                         <div class="container-xxl flex-grow-1 container-p-y">
                            <router-view></router-view>
                         </div>
-                        <footer class="bg-footer-theme">
+                        <div class="bg-footer-theme">
                             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                                 <div class="mb-2 mb-md-0">
                                     ©
@@ -28,7 +28,7 @@
                                     <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank" class="footer-link me-4">Support</a>
                                 </div> -->
                             </div>
-                        </footer>
+                        </div>
                     </div>
                 </div>
             </div>
