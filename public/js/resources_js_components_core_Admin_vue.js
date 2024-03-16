@@ -199,34 +199,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      { staticClass: "content-footer footer bg-footer-theme" },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column",
-          },
-          [
-            _c("div", { staticClass: "mb-2 mb-md-0" }, [
-              _vm._v(
-                "\n                                ©\n                                Copyright by\n                                "
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "footer-link fw-bolder",
-                  attrs: { href: "#", target: "_blank" },
-                },
-                [_vm._v("Samartha")]
-              ),
-            ]),
-          ]
-        ),
-      ]
-    )
+    return _c("footer", { staticClass: "bg-footer-theme" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column",
+        },
+        [
+          _c("div", { staticClass: "mb-2 mb-md-0" }, [
+            _vm._v(
+              "\n                                ©\n                                Copyright by\n                                "
+            ),
+            _c(
+              "a",
+              {
+                staticClass: "footer-link fw-bolder",
+                attrs: { href: "#", target: "_blank" },
+              },
+              [_vm._v("Samartha")]
+            ),
+          ]),
+        ]
+      ),
+    ])
   },
 ]
 render._withStripped = true
