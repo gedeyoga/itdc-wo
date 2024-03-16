@@ -212,68 +212,15 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "mb-2 mb-md-0" }, [
               _vm._v(
-                "\n                                ©\n                                , made with ❤️ by\n                                "
+                "\n                                ©\n                                Copyright by\n                                "
               ),
               _c(
                 "a",
                 {
                   staticClass: "footer-link fw-bolder",
-                  attrs: {
-                    href: "https://themeselection.com",
-                    target: "_blank",
-                  },
+                  attrs: { href: "#", target: "_blank" },
                 },
-                [_vm._v("ThemeSelection")]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c(
-                "a",
-                {
-                  staticClass: "footer-link me-4",
-                  attrs: {
-                    href: "https://themeselection.com/license/",
-                    target: "_blank",
-                  },
-                },
-                [_vm._v("License")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "footer-link me-4",
-                  attrs: {
-                    href: "https://themeselection.com/",
-                    target: "_blank",
-                  },
-                },
-                [_vm._v("More Themes")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "footer-link me-4",
-                  attrs: {
-                    href: "https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/",
-                    target: "_blank",
-                  },
-                },
-                [_vm._v("Documentation")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "footer-link me-4",
-                  attrs: {
-                    href: "https://github.com/themeselection/sneat-html-admin-template-free/issues",
-                    target: "_blank",
-                  },
-                },
-                [_vm._v("Support")]
+                [_vm._v("Samartha")]
               ),
             ]),
           ]

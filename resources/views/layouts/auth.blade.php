@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SB Admin 2 - Login</title>
+    <title> {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Icons. Uncomment required icon fonts -->
     <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" /> -->
