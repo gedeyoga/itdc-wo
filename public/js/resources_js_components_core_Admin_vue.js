@@ -37,6 +37,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 __webpack_require__(/*! ../../mixins.js */ "./resources/js/mixins.js");
 __webpack_require__(/*! ../../components.js */ "./resources/js/components.js");
@@ -171,11 +183,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
-                _c("div", [
-                  _vm._v(
-                    "\n                        dsfnsdkfdsk\n                    "
-                  ),
-                ]),
+                _vm._m(0),
               ]),
             ],
             1
@@ -186,7 +194,41 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "footer",
+      { staticClass: "content-footer footer bg-footer-theme" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column",
+          },
+          [
+            _c("div", { staticClass: "mb-2 mb-md-0" }, [
+              _vm._v(
+                "\n                                ©\n                                Copyright by\n                                "
+              ),
+              _c(
+                "a",
+                {
+                  staticClass: "footer-link fw-bolder",
+                  attrs: { href: "#", target: "_blank" },
+                },
+                [_vm._v("Samartha")]
+              ),
+            ]),
+          ]
+        ),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
