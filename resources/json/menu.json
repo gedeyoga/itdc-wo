@@ -70,8 +70,8 @@
                 "menu_icon": "bxs-package",
                 "child_routes": [
                     {
-                        "name": "locations.index",
-                        "menu_title": "Task Category",
+                        "name": "task-categories.index",
+                        "menu_title": "Category",
                         "active": false,
                         "permissions": ["task-category.task-category-list"]
                     },
@@ -83,7 +83,7 @@
                     }
                 ],
                 "active": false,
-                "permissions": ["task-category.task-category-list"]
+                "permissions": ["task-category.task-category-list" , "locations.location-list"]
             },
             {
                 "menu_title": "User Management",
