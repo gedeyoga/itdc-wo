@@ -33,6 +33,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 __webpack_require__(/*! ../../mixins.js */ "./resources/js/mixins.js");
 __webpack_require__(/*! ../../components.js */ "./resources/js/components.js");
@@ -166,6 +170,12 @@ var render = function () {
                   [_c("router-view")],
                   1
                 ),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v(
+                    "\n                        dsfnsdkfdsk\n                    "
+                  ),
+                ]),
               ]),
             ],
             1
