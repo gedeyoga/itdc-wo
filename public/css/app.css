@@ -25674,3 +25674,7 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   font-size: 14px !important;
   display: block !important;
 }
+
+.content-wrapper footer {
+  display: none !important;
+}
