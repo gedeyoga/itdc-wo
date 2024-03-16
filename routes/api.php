@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/', [LocationController::class, 'store'])->name('store');
         Route::put('/{location}', [LocationController::class, 'update'])->name('update');
         Route::get('/{location}', [LocationController::class, 'show'])->name('show');
-        Route::delete('/{location}', [LocationController::class, 'store'])->name('destroy');
+        Route::delete('/{location}', [LocationController::class, 'destroy'])->name('destroy');
     });
 
     //Priorities

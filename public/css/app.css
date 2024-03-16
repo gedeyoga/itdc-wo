@@ -25670,4 +25670,7 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   filter: drop-shadow(0 2px 4px #a1acb866);
 }
 
-
+.filter-text {
+  font-size: 14px !important;
+  display: block !important;
+}

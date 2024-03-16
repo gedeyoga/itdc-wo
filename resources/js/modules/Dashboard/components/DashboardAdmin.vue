@@ -161,7 +161,11 @@ export default {
                     total_wo += this.status_overview[key]
                 }
 
-                return Math.round((this.status_overview.finish / total_wo ) * 100);
+                const percentage = Math.round((this.status_overview.finish / total_wo ) * 100);
+
+                console.log(typeof percentage);
+
+                return !isNaN(percentage) ? percentage : 0;
             }
 
             return 0;

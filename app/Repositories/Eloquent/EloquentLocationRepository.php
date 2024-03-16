@@ -12,19 +12,21 @@ class EloquentLocationRepository extends EloquentBaseRepository implements Locat
 
     public function list(array $params)
     {
-        $users = $this->model;
+        $locations = $this->model;
 
         if(isset($params['search'])) {
-            $users = $users->where(function($query) use ($params) {
+            $locations = $locations->where(function($query) use ($params) {
                 $query->where('name' , 'like' , '%'.$params['search'].'%');
             });
         }
 
+        $locations = $locations->orderByDesc('created_at');
+
         if(isset($params['per_page'])){
-            return $users->paginate($params['per_page']);
+            return $locations->paginate($params['per_page']);
         }
 
-        return $users->get();
+        return $locations->get();
     }
     
 }
