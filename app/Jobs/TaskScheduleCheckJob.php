@@ -55,7 +55,7 @@ class TaskScheduleCheckJob implements ShouldQueue
         $generate_wo = false;
         foreach ($days as $day) {
 
-            if($day->day == date('N') && $day->hour == date('H:i:00')) {
+            if($day->day == (date('N') - 1) && $day->hour == date('H:i:00')) {
                 $generate_wo = true;
                 break;
             }
