@@ -164,8 +164,11 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
                 DB::raw("count(status) as amount"),
             ])
 
-            ->when(isset($params['date']), function ($q) use ($params) {
-                return $q->whereBetween('date', $params['date']);
+            ->when(isset($params['date']) && is_array($params['date'] && count($params['date']) == 2), function ($q) use ($params) {
+                return $q->whereBetween('date', [
+                    date('Y-m-d 00:00:00' , strtotime($params['date'][0])),
+                    date('Y-m-d 23:59:59' , strtotime($params['date'][1]))
+                ]);
             })
 
             ->when(isset($params['user_id']), function ($q) use ($params) {

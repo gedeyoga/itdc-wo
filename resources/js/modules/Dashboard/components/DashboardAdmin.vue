@@ -79,7 +79,7 @@
                     <div
                         class="card-header d-flex align-items-center justify-content-between"
                     >
-                        <h5 class="card-title m-0 me-2">Overview</h5>
+                        <h5 class="card-title m-0 me-2">Overview {{ current_month }}</h5>
                     </div>
                     <div class="card-body" v-loading="loading_overview">
                         <div class="text-center">
@@ -115,6 +115,7 @@
 import PriorityComponent from "../../Workorder/components/PriorityComponent.vue";
 import StatusComponent from "../../Workorder/components/StatusComponent.vue";
 import DialogDetailWorkOrder from "../../Workorder/components/DialogDetailWorkOrder.vue";
+import moment from "moment";
 
 export default {
     components: {
@@ -169,6 +170,10 @@ export default {
             }
 
             return 0;
+        },
+
+        current_month() {
+            return moment().format('MMMM');
         }
     },
 
@@ -186,6 +191,10 @@ export default {
                     relations:
                         "priority,task_category,work_order_items,assignees.user,location",
                     ...this.filter,
+                    date: [
+                        moment().startOf('month').format('YYYY-MM-DD'),
+                        moment().endOf('month').format('YYYY-MM-DD')
+                    ]
                 },
                 cancelToken: cancelSource.token,
             };
@@ -256,8 +265,8 @@ export default {
                     params: {
                         user_id: this.user.id,
                         date: [
-                            '2023-12-01',
-                            '2023-12-31'
+                            moment().startOf('month').format('YYYY-MM-DD'),
+                            moment().endOf('month').format('YYYY-MM-DD')
                         ]
                     }
                 })

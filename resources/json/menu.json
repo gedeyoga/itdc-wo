@@ -3,6 +3,29 @@
         "group_name" : "Menu",
         "group_menu" : [
             {
+                "menu_title": "Data Master",
+                "menu_icon": "bxs-package",
+                "child_routes": [
+                    {
+                        "name": "task-categories.index",
+                        "menu_title": "Category",
+                        "active": false,
+                        "permissions": ["task-category.task-category-list"]
+                    },
+                    {
+                        "name": "locations.index",
+                        "menu_title": "Location",
+                        "active": false,
+                        "permissions": ["location.location-list"]
+                    }
+                ],
+                "active": false,
+                "permissions": [
+                    "task-category.task-category-list",
+                    "locations.location-list"
+                ]
+            },
+            {
                 "name": "home",
                 "menu_title": "Dashboard",
                 "menu_icon": "bx-home-circle",
@@ -64,26 +87,6 @@
                     "report-daily.report-daily-list",
                     "report-daily.report-monthly-list"
                 ]
-            },
-            {
-                "menu_title": "Data Master",
-                "menu_icon": "bxs-package",
-                "child_routes": [
-                    {
-                        "name": "task-categories.index",
-                        "menu_title": "Category",
-                        "active": false,
-                        "permissions": ["task-category.task-category-list"]
-                    },
-                    {
-                        "name": "locations.index",
-                        "menu_title": "Location",
-                        "active": false,
-                        "permissions": ["location.location-list"]
-                    }
-                ],
-                "active": false,
-                "permissions": ["task-category.task-category-list" , "locations.location-list"]
             },
             {
                 "menu_title": "User Management",
