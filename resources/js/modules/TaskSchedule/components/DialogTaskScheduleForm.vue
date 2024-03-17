@@ -222,7 +222,7 @@ export default {
                     checked:false,
                     label:"Sunday",
                     hour:null,
-                    value: 0,
+                    value: 7,
                 },
                 {
                     checked:false,
