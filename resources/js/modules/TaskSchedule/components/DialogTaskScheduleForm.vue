@@ -218,12 +218,7 @@ export default {
             ],
 
             days: [
-                {
-                    checked:false,
-                    label:"Sunday",
-                    hour:null,
-                    value: 7,
-                },
+                
                 {
                     checked:false,
                     label:"Monday",
@@ -259,6 +254,12 @@ export default {
                     label:"Saturday",
                     hour:null,
                     value: 6,
+                },
+                {
+                    checked:false,
+                    label:"Sunday",
+                    hour:null,
+                    value: 7,
                 },
             ],
 
