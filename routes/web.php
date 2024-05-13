@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\PompaController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PriorityController;
 use App\Http\Controllers\Admin\ReportController;
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/locations' , [LocationController::class, 'index'])->name('locations.list');
     Route::get('/task-schedules' , [TaskScheduleController::class, 'index'])->name('task-schedules.list');
     Route::get('/priorities' , [PriorityController::class, 'index'])->name('priorities.list');
+    Route::get('/pompas' , [PompaController::class, 'index'])->name('pompas.list');
 
     Route::get('/work-order' , [WorkOrderController::class, 'index'])->name('work-order.list');
     Route::get('/work-order/scan', [WorkOrderController::class, 'scan'])->name('work-order.scan');

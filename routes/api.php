@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\PompaController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PriorityController;
 use App\Http\Controllers\Api\ReportController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TaskScheduleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WorkOrderController;
+use App\Models\Pompa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -106,6 +108,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::get('/report/daily' , [ReportController::class , 'reportSummaryDaily'])->name('report.daily');
         Route::get('/report/monthly' , [ReportController::class , 'reportWorkorderMontly'])->name('report.monthly');
+    });
+
+    //Pompa
+    Route::group(['prefix' => 'pompas', 'as' => 'api.pompas.'], function () {
+        Route::get('/', [PompaController::class, 'list'])->name('list');
+        Route::post('/', [PompaController::class, 'store'])->name('store');
+        Route::put('/{pompa}', [PompaController::class, 'update'])->name('update');
+        Route::get('/{pompa}', [PompaController::class, 'show'])->name('show');
+        Route::delete('/{pompa}', [PompaController::class, 'destroy'])->name('destroy');
     });
 
 

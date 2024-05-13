@@ -17,12 +17,19 @@
                         "menu_title": "Location",
                         "active": false,
                         "permissions": ["location.location-list"]
+                    },
+                    {
+                        "name": "pompas.index",
+                        "menu_title": "Pompa",
+                        "active": false,
+                        "permissions": ["pompa.pompa-list"]
                     }
                 ],
                 "active": false,
                 "permissions": [
                     "task-category.task-category-list",
-                    "locations.location-list"
+                    "locations.location-list",
+                    "pompa.pompa-list"
                 ]
             },
             {

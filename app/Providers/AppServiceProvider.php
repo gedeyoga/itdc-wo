@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Location;
+use App\Models\Pompa;
 use App\Models\Priority;
 use App\Models\Role;
 use App\Models\Task;
@@ -17,6 +18,7 @@ use App\Models\WorkOrderAssignee;
 use App\Models\WorkOrderItem;
 use App\Models\WorkOrderLog;
 use App\Repositories\Eloquent\EloquentLocationRepository;
+use App\Repositories\Eloquent\EloquentPompaRepository;
 use App\Repositories\Eloquent\EloquentPriorityRepository;
 use App\Repositories\Eloquent\EloquentRoleRepository;
 use App\Repositories\Eloquent\EloquentTaskCategoryRepository;
@@ -31,6 +33,7 @@ use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderLogRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderRepository;
 use App\Repositories\LocationRepository;
+use App\Repositories\PompaRepository;
 use App\Repositories\PriorityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\TaskCategoryRepository;
@@ -150,6 +153,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TaskScheduleYearRepository::class, function () {
 
             $repository = new EloquentTaskScheduleYearRepository(new TaskScheduleYear());
+
+            return $repository;
+        });
+
+        $this->app->bind(PompaRepository::class, function () {
+
+            $repository = new EloquentPompaRepository(new Pompa());
 
             return $repository;
         });
