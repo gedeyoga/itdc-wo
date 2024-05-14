@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LocationInstallationController;
@@ -127,6 +128,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/{location_installation}', [LocationInstallationController::class, 'update'])->name('update');
         Route::get('/{location_installation}', [LocationInstallationController::class, 'show'])->name('show');
         Route::delete('/{location_installation}', [LocationInstallationController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group(['prefix' => 'tenants', 'as' => 'api.tenants.'], function () {
+        Route::get('/', [TenantController::class, 'list'])->name('list');
+        Route::post('/', [TenantController::class, 'store'])->name('store');
+        Route::put('/{tenant}', [TenantController::class, 'update'])->name('update');
+        Route::get('/{tenant}', [TenantController::class, 'show'])->name('show');
+        Route::delete('/{tenant}', [TenantController::class, 'destroy'])->name('destroy');
     });
 
 

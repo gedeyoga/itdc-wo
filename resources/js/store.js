@@ -7,6 +7,7 @@ import Location from "./modules/Location/store";
 import User from "./modules/User/store";
 import Task from "./modules/Task/store";
 import Pompa from "./modules/Pompa/store";
+import Tenant from "./modules/Tenant/store";
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
         Location,
         User,
         Task,
-        Pompa
+        Pompa,
+        Tenant
     },
 });
 

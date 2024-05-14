@@ -29,6 +29,12 @@
                         "menu_title": "Location Installation",
                         "active": false,
                         "permissions": ["location-installation.location-installation-list"]
+                    },
+                    {
+                        "name": "tenants.index",
+                        "menu_title": "Tenant",
+                        "active": false,
+                        "permissions": ["tenant.tenant-list"]
                     }
                 ],
                 "active": false,
@@ -36,7 +42,8 @@
                     "task-category.task-category-list",
                     "locations.location-list",
                     "pompa.pompa-list",
-                    "location-installation.location-installation-list"
+                    "location-installation.location-installation-list",
+                    "tenant.tenant-list"
                 ]
             },
             {
