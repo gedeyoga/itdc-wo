@@ -86,6 +86,16 @@
                             <span>{{ scope.row.capacity }} m3/Minute</span>
                         </template>
                     </el-table-column>
+                    <el-table-column prop="status" label="Status" sortable>
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.status == 'active'" class="badge bg-label-success" style="text-transform: capitalize;">
+                                Active
+                            </span>
+                            <span v-if="scope.row.status == 'not_active'" class="badge bg-label-danger" style="text-transform: capitalize;">
+                                Not Active
+                            </span>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="actions" label="Action">
                         <template slot-scope="scope">
                             <el-button-group>

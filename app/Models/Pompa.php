@@ -12,6 +12,10 @@ class Pompa extends Model
 
     protected $table = 'pompas';
 
+    protected $hidden = [
+        'deleted_at'
+    ];
+
     protected $fillable = [
         'name',
         'merk',

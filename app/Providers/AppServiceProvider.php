@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Location;
+use App\Models\LocationInstallation;
 use App\Models\Pompa;
 use App\Models\Priority;
 use App\Models\Role;
@@ -17,6 +18,7 @@ use App\Models\WorkOrder;
 use App\Models\WorkOrderAssignee;
 use App\Models\WorkOrderItem;
 use App\Models\WorkOrderLog;
+use App\Repositories\Eloquent\EloquentLocationInstallationRepository;
 use App\Repositories\Eloquent\EloquentLocationRepository;
 use App\Repositories\Eloquent\EloquentPompaRepository;
 use App\Repositories\Eloquent\EloquentPriorityRepository;
@@ -32,6 +34,7 @@ use App\Repositories\Eloquent\EloquentWorkOrderAssigneeRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderLogRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderRepository;
+use App\Repositories\LocationInstallationRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\PompaRepository;
 use App\Repositories\PriorityRepository;
@@ -160,6 +163,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PompaRepository::class, function () {
 
             $repository = new EloquentPompaRepository(new Pompa());
+
+            return $repository;
+        });
+
+        $this->app->bind(LocationInstallationRepository::class, function () {
+
+            $repository = new EloquentLocationInstallationRepository(new LocationInstallation());
 
             return $repository;
         });

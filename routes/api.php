@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\LocationInstallationController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PompaController;
 use App\Http\Controllers\Api\PostController;
@@ -117,6 +118,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/{pompa}', [PompaController::class, 'update'])->name('update');
         Route::get('/{pompa}', [PompaController::class, 'show'])->name('show');
         Route::delete('/{pompa}', [PompaController::class, 'destroy'])->name('destroy');
+    });
+
+    //Location Installation
+    Route::group(['prefix' => 'location-installations', 'as' => 'api.location-installations.'], function () {
+        Route::get('/', [LocationInstallationController::class, 'list'])->name('list');
+        Route::post('/', [LocationInstallationController::class, 'store'])->name('store');
+        Route::put('/{location_installation}', [LocationInstallationController::class, 'update'])->name('update');
+        Route::get('/{location_installation}', [LocationInstallationController::class, 'show'])->name('show');
+        Route::delete('/{location_installation}', [LocationInstallationController::class, 'destroy'])->name('destroy');
     });
 
 
