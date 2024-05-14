@@ -11,6 +11,7 @@ import TaskScheduleRoutes from "./modules/TaskSchedule/TaskScheduleRoutes";
 import ReportRoutes from "./modules/Report/ReportRoutes";
 import LocationRoutes from "./modules/Location/LocationRoutes";
 import PompaRoutes from "./modules/Pompa/PompaRoutes";
+import LocationInstallationRoutes from "./modules/LocationInstallation/LocationInstallationRoutes";
 
 
 Vue.use(VueRouter);
@@ -26,6 +27,7 @@ const routes = [
     ...ReportRoutes,
     ...LocationRoutes,
     ...PompaRoutes,
+    ...LocationInstallationRoutes,
 ];
 
 const router = new VueRouter({

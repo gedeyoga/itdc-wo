@@ -23,13 +23,20 @@
                         "menu_title": "Pompa",
                         "active": false,
                         "permissions": ["pompa.pompa-list"]
+                    },
+                    {
+                        "name": "location-installations.index",
+                        "menu_title": "Location Installation",
+                        "active": false,
+                        "permissions": ["location-installation.location-installation-list"]
                     }
                 ],
                 "active": false,
                 "permissions": [
                     "task-category.task-category-list",
                     "locations.location-list",
-                    "pompa.pompa-list"
+                    "pompa.pompa-list",
+                    "location-installation.location-installation-list"
                 ]
             },
             {

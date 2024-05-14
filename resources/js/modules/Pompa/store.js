@@ -3,29 +3,29 @@ import axios from "axios";
 export default {
     state: () => {
         return {
-            locations: [],
+            pompas: [],
         };
     },
     mutations: {
-        setLocations(state, data) {
-            state.locations = data;
+        setPompas(state, data) {
+            state.pompas = data;
         },
     },
     getters: {
-        locations: (state) => {
-            return state.locations;
+        pompas: (state) => {
+            return state.pompas;
         },
     },
 
     actions: {
-        fetchLocations({ commit }, params) {
+        fetchPompas({ commit }, params) {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(route("api.locations.list"), {
+                    .get(route("api.pompas.list"), {
                         params: params,
                     })
                     .then((response) => {
-                        commit("setLocations", response.data.data);                        
+                        commit("setPompas", response.data.data);
                         resolve(response);
                     })
                     .catch((err) => {
