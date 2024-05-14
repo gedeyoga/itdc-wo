@@ -13,6 +13,7 @@ use App\Models\TaskSchedule;
 use App\Models\TaskScheduleDay;
 use App\Models\TaskScheduleMonth;
 use App\Models\TaskScheduleYear;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Models\WorkOrder;
 use App\Models\WorkOrderAssignee;
@@ -29,6 +30,7 @@ use App\Repositories\Eloquent\EloquentTaskScheduleDayRepository;
 use App\Repositories\Eloquent\EloquentTaskScheduleMonthRepository;
 use App\Repositories\Eloquent\EloquentTaskScheduleRepository;
 use App\Repositories\Eloquent\EloquentTaskScheduleYearRepository;
+use App\Repositories\Eloquent\EloquentTenantRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderAssigneeRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
@@ -45,6 +47,7 @@ use App\Repositories\TaskScheduleDayRepository;
 use App\Repositories\TaskScheduleMonthRepository;
 use App\Repositories\TaskScheduleRepository;
 use App\Repositories\TaskScheduleYearRepository;
+use App\Repositories\TenantRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WorkOrderAssigneeRepository;
 use App\Repositories\WorkOrderItemRepository;
@@ -170,6 +173,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LocationInstallationRepository::class, function () {
 
             $repository = new EloquentLocationInstallationRepository(new LocationInstallation());
+
+            return $repository;
+        });
+
+        $this->app->bind(TenantRepository::class, function () {
+
+            $repository = new EloquentTenantRepository(new Tenant());
 
             return $repository;
         });

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TaskCategoryController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\TaskScheduleController;
+use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/priorities' , [PriorityController::class, 'index'])->name('priorities.list');
     Route::get('/pompas' , [PompaController::class, 'index'])->name('pompas.list');
     Route::get('/location-installations' , [LocationInstallationController::class, 'index'])->name('location-installations.list');
+    Route::get('/tenants' , [TenantController::class, 'index'])->name('tenants.list');
 
     Route::get('/work-order' , [WorkOrderController::class, 'index'])->name('work-order.list');
     Route::get('/work-order/scan', [WorkOrderController::class, 'scan'])->name('work-order.scan');
