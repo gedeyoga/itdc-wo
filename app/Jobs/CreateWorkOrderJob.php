@@ -44,7 +44,11 @@ class CreateWorkOrderJob implements ShouldQueue
             'priority_id' => $this->taskSchedule->task->priority_id, 
             'date' => date('Y-m-d H:i:s'), 
             'created_by' => $this->taskSchedule->created_by, 
-            'location_id' => $this->taskSchedule->task->location_id
+            'location_id' => $this->taskSchedule->task->location_id,
+            'fill_history_pompa' =>  $this->taskSchedule->task->fill_history_pompa,
+            'work_order_attachments' => $this->taskSchedule->task->task_attachments->map(function($item) {
+                return $item->attach_id . ':' . $item->attach_type;
+            })->toArray(),
         ];
 
         $work_order_items = $this->taskSchedule->task->task_items->map(function($item) {

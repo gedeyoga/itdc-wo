@@ -124,6 +124,20 @@
                 </el-form-item>
             </div>
         </div>
+
+        <div class="mt-4">
+            <h5>Attachment</h5>
+            <el-checkbox v-model="task.fill_history_pompa" :true-label="1" :false-label="0">Wajib mencatat meter counter pompa</el-checkbox>
+            <el-form-item v-if="task.fill_history_pompa" label="Choose Location Installation" prop="task_attachments" :rules="{
+                required: true,
+                trigger: ['change'],
+                message: 'Field required.'
+            }">
+                <el-select clearable filterable multiple class="w-100" v-model="task.task_attachments" placeholder="Choose Location">
+                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in locationInstallations" :key="index"></el-option>
+                </el-select>
+            </el-form-item>
+        </div>
        
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -156,6 +170,8 @@ export default {
                         has_media: 0,
                     }
                 ],
+                fill_history_pompa: false,
+                task_attachments: [],
             },
             rules: {
                 name: [
@@ -202,6 +218,12 @@ export default {
             priorities: (state) => state.Priority.priorities,
             task_categories: (state) => state.TaskCategory.task_categories,
             locations: (state) => state.Location.locations,
+            locationInstallations: (state) => state.LocationInstallation.locationInstallations.map((item) => {
+                return {
+                    name: item.name,
+                    value: item.id + ':' + item.type_relation,
+                };
+            }),
         })
     },
 
@@ -264,7 +286,12 @@ export default {
         },
 
         setForm(task) {
-            this.task = {...this.task, ...task};
+            let data = {...task};
+            data.task_attachments = task.task_attachments.map((item) => { 
+                return item.attach_id + ':' + item.attach_type
+            });
+            
+            this.task = {...this.task, ...data};
         },
 
         resetForm() {
@@ -273,6 +300,8 @@ export default {
                 description: '',
                 task_category_id: '',
                 priority_id: '',
+                fill_history_pompa: 0,
+                task_attachments: [],
                 task_items: [
                     {
                         name: '',

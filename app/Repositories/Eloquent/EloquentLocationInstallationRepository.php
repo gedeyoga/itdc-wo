@@ -27,15 +27,15 @@ class EloquentLocationInstallationRepository extends EloquentBaseRepository impl
         }
 
         if(isset($params['location_id'])) {
-            $location_installations = $location_installations->where(function ($query) use ($params) {
-                $query->where('location_id', $params['location_id']);
-            });
+            $location_installations = $location_installations->where('location_id', $params['location_id']);;
         }
 
         if (isset($params['pompa_id'])) {
-            $location_installations = $location_installations->where(function ($query) use ($params) {
-                $query->where('pompa_id', $params['pompa_id']);
-            });
+            $location_installations = $location_installations->where('pompa_id', $params['pompa_id']);
+        }
+
+        if (isset($params['status'])) {
+            $location_installations = $location_installations->where('status' , $params['status']);
         }
 
         if (isset($params['order_by']) && isset($params['order'])) {

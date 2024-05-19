@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\WorkorderCreated;
+use App\Models\WorkOrder;
+use App\Repositories\HistoryPompaRepository;
 use App\Repositories\WorkOrderLogRepository;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

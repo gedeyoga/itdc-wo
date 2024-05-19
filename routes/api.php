@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HistoryPompaController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LocationInstallationController;
 use App\Http\Controllers\Api\LoginController;
@@ -136,6 +137,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/{tenant}', [TenantController::class, 'update'])->name('update');
         Route::get('/{tenant}', [TenantController::class, 'show'])->name('show');
         Route::delete('/{tenant}', [TenantController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group(['prefix' => 'history-pompas', 'as' => 'api.history-pompas.'], function () {
+        Route::put('/{history_pompa}', [HistoryPompaController::class, 'update'])->name('update');
     });
 
 

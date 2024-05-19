@@ -179,6 +179,24 @@
             </el-tab-pane>
         </el-tabs>
 
+        
+        <div class="mt-5" v-if="workorder.work_order_attachments.length > 0">
+            <h5>Attachments</h5>
+
+            <div class="row">
+                <div class="col-lg-6" v-for="(attachment, index) in workorder.work_order_attachments" :key="index">
+                    <component 
+                        :ref="'attachment-'+ index" 
+                        :is="buildComponentAttachment(attachment)" 
+                        :attachment="attachment" 
+                        :key="index"
+                        :canFill="workorder.status != 'finish' && workorder.status != 'pending'  "
+                    ></component>
+                </div>
+            </div>
+
+        </div>
+
         <upload-media-workorder-item 
             ref="uploadMediaWoRef"
             @uploadSuccess="uploadMediaSuccess"
@@ -196,7 +214,8 @@ export default {
     components:{
         PriorityComponent,
         StatusComponent,
-        UploadMediaWorkorderItem
+        UploadMediaWorkorderItem,
+        'location-installation-attachment' : () => import("../../LocationInstallation/components/LocationInstallationAttachment.vue"),
     },
     data() {
         return {
@@ -226,8 +245,8 @@ export default {
         },
 
         validate(callback){
-            
-            this.$refs["workorderForm"].validate((valid) => {
+
+            this.$refs["workorderForm"].validate(async (valid) => {
                 let fields = this.$refs["workorderForm"].fields;
                 for (let i = 0; i < fields.length; i++) {
                     if (fields[i].validateState == "error") {
@@ -247,7 +266,14 @@ export default {
                     }
                 }
 
-                if (valid) {
+                let validateAttachment = [];
+
+                await this.workorder_form.work_order_attachments.forEach(async (item , index) => {
+                    let data = await this.$refs['attachment-'+index][0].validateForm();
+                    validateAttachment.push(data ? 'valid' : 'not-valid');
+                })
+
+                if (valid && validateAttachment.filter((v) => v == 'valid').length == this.workorder_form.work_order_attachments.length) {
                     callback(valid);
                 }
             })
@@ -267,6 +293,10 @@ export default {
                 callback(new Error('Please input the password'));
             } 
             callback();
+        },
+
+        buildComponentAttachment(attachment) {
+            return attachment.attach_type.replace('_' , '-') + '-attachment';
         }
     },
 

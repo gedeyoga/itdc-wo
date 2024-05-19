@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Events\TaskCreated;
+use App\Events\WorkOrderAttachmentCreated;
+use App\Events\WorkOrderAttachmentUpdated;
 use App\Events\WorkorderCreated;
 use App\Events\WorkOrderFinished;
 use App\Events\WorkOrderPending;
 use App\Events\WorkOrderProgress;
 use App\Events\WorkorderUpdated;
 use App\Listeners\TaskCreatedListener;
+use App\Listeners\WorkOrderAttachmentCreatedListener;
+use App\Listeners\WorkOrderAttachmentUpdatedListener;
 use App\Listeners\WorkorderCreatedListener;
 use App\Listeners\WorkorderFinishListener;
 use App\Listeners\WorkorderProgressListener;
@@ -48,7 +52,15 @@ class EventServiceProvider extends ServiceProvider
 
         TaskCreated::class => [
             TaskCreatedListener::class
-        ]
+        ],
+
+        WorkOrderAttachmentCreated::class => [
+            WorkOrderAttachmentCreatedListener::class
+        ],
+
+        WorkOrderAttachmentUpdated::class => [
+            WorkOrderAttachmentUpdatedListener::class
+        ],
     ];
 
     /**

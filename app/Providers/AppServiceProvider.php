@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\HistoryPompa;
 use App\Models\Location;
 use App\Models\LocationInstallation;
 use App\Models\Pompa;
@@ -17,8 +18,10 @@ use App\Models\Tenant;
 use App\Models\User;
 use App\Models\WorkOrder;
 use App\Models\WorkOrderAssignee;
+use App\Models\WorkOrderAttachment;
 use App\Models\WorkOrderItem;
 use App\Models\WorkOrderLog;
+use App\Repositories\Eloquent\EloquentHistoryPompaRepository;
 use App\Repositories\Eloquent\EloquentLocationInstallationRepository;
 use App\Repositories\Eloquent\EloquentLocationRepository;
 use App\Repositories\Eloquent\EloquentPompaRepository;
@@ -33,9 +36,11 @@ use App\Repositories\Eloquent\EloquentTaskScheduleYearRepository;
 use App\Repositories\Eloquent\EloquentTenantRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderAssigneeRepository;
+use App\Repositories\Eloquent\EloquentWorkOrderAttachmentRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderItemRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderLogRepository;
 use App\Repositories\Eloquent\EloquentWorkOrderRepository;
+use App\Repositories\HistoryPompaRepository;
 use App\Repositories\LocationInstallationRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\PompaRepository;
@@ -50,11 +55,13 @@ use App\Repositories\TaskScheduleYearRepository;
 use App\Repositories\TenantRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WorkOrderAssigneeRepository;
+use App\Repositories\WorkOrderAttachmentRepository;
 use App\Repositories\WorkOrderItemRepository;
 use App\Repositories\WorkOrderLogRepository;
 use App\Repositories\WorkOrderRepository;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -183,6 +190,18 @@ class AppServiceProvider extends ServiceProvider
 
             return $repository;
         });
+        $this->app->bind(HistoryPompaRepository::class, function () {
+
+            $repository = new EloquentHistoryPompaRepository(new HistoryPompa());
+
+            return $repository;
+        });
+        $this->app->bind(WorkOrderAttachmentRepository::class, function () {
+
+            $repository = new EloquentWorkOrderAttachmentRepository(new WorkOrderAttachment());
+
+            return $repository;
+        });
     }
 
     /**
@@ -192,6 +211,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         if (env('NGROK') == true) {
             URL::forceScheme('https');
         }

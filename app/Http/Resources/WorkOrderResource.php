@@ -20,6 +20,7 @@ class WorkOrderResource extends JsonResource
         $data['updated_at'] = $this->updated_at->format('Y-m-d H:i:s');
 
         $data['work_order_items'] = WorkOrderItemResource::collection($this->whenLoaded('work_order_items'));
+        $data['work_order_attachments'] = $this->whenLoaded('work_order_attachments');
         $data['priority'] = new PriorityResource($this->whenLoaded('priority'));
         $data['location'] = new LocationResource($this->whenLoaded('location'));
         $data['task_category'] = new TaskCategoryResource($this->whenLoaded('task_category'));
