@@ -311,7 +311,7 @@ export default {
                     order_by: this.order_meta.order_by,
                     order: this.order_meta.order,
                     search: this.searchQuery,
-                    relations: "priority,task_category,work_order_items,assignees.user",
+                    relations: "priority,task_category,work_order_items,assignees.user,work_order_attachments",
                     ...this.filter
                 },
                 cancelToken: cancelSource.token,
@@ -417,7 +417,7 @@ export default {
                 this.users = mapping;
             });
             this.$store.dispatch('fetchTasks',{
-                relations: 'priority,task_items',
+                relations: 'priority,task_items,task_attachments',
             });
 
         })

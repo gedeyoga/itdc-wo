@@ -226,7 +226,7 @@ export default {
                     order_by: this.order_meta.order_by,
                     order: this.order_meta.order,
                     search: this.searchQuery,
-                    relations: "priority,task_category,task_items",
+                    relations: "priority,task_category,task_items,task_attachments",
                     ...this.filter
                 },
                 cancelToken: cancelSource.token,
@@ -310,6 +310,9 @@ export default {
         this.$nextTick().then(() => {
             Promise.all([
                 this.$store.dispatch('fetchLocations'),
+                this.$store.dispatch('fetchLocationInstallations' , {
+                    status: 'active',
+                }),
                 this.$store.dispatch('fetchPriorities'),
                 this.$store.dispatch('fetchTaskCategories'),
             ])

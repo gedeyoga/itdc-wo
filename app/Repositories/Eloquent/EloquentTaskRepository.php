@@ -15,7 +15,20 @@ class EloquentTaskRepository extends EloquentBaseRepository implements TaskRepos
 
         $task->task_items()->createMany($items);
 
-        event(new TaskCreated($task));
+        if(isset($data['task_attachments']) && is_array($data['task_attachments'])) {
+            foreach ($data['task_attachments'] as $value){
+                $explode = explode(':' , $value);
+                if(count($explode) == 2) {
+                    $task->task_attachments()->create([
+                        'task_id' => $task->id,
+                        'attach_id' => $explode[0] ,
+                        'attach_type' => $explode[1],
+                    ]);
+                }
+            }
+        }
+
+        event(new TaskCreated($task->refresh()));
 
         return $task;
     }
@@ -23,6 +36,30 @@ class EloquentTaskRepository extends EloquentBaseRepository implements TaskRepos
     public function updateTask(Task $task, array $data, array $items)
     {
         $model = $this->update($task , $data);
+
+        if(isset($data['fill_history_pompa']) && $data['fill_history_pompa'] == 1) {
+            if (isset($data['task_attachments']) && is_array($data['task_attachments'])) {
+
+                $task->task_attachments()->delete();
+
+                foreach ($data['task_attachments'] as $value) {
+                    $explode = explode(':', $value);
+                    if (count($explode) == 2) {
+                        $task->task_attachments()->create([
+                            'task_id' => $task->id,
+                            'attach_id' => $explode[0],
+                            'attach_type' => $explode[1],
+                        ]);
+                    }
+                }
+            }
+        }else if(isset($data['fill_history_pompa']) && $data['fill_history_pompa'] == 0){
+            $task->task_attachments()->delete();
+
+            $task->update([
+                'fill_history_pompa' => 0
+            ]);
+        }
 
         $model->task_items()->delete();
 

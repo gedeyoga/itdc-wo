@@ -13,7 +13,7 @@ class Task extends Model implements HasMedia
     use HasFactory, SoftDeletes , InteractsWithMedia;
 
     protected $fillable = [
-        'name','description','task_category_id','priority_id', 'location_id'
+        'name','description','task_category_id','priority_id', 'location_id', 'fill_history_pompa'
     ];
 
     public static function boot()
@@ -46,5 +46,17 @@ class Task extends Model implements HasMedia
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function task_attachments()
+    {
+        return $this->hasMany(TaskAttachment::class , 'task_id');
+    }
+
+    public function task_attachment_location_installation() 
+    {
+        return $this->task_attachments()->where('attach_type' , 'installation_location');
+    }
+    
+
 
 }

@@ -175,6 +175,20 @@
                 </el-form-item>
             </div>
         </div>
+
+        <div class="mt-4">
+            <h5>Attachment</h5>
+            <el-checkbox v-model="work_order.fill_history_pompa" :true-label="1" :false-label="0">Wajib mencatat meter counter pompa</el-checkbox>
+            <el-form-item v-if="work_order.fill_history_pompa" label="Choose Location Installation" prop="work_order_attachments" :rules="{
+                required: true,
+                trigger: ['change'],
+                message: 'Field required.'
+            }">
+                <el-select clearable filterable multiple class="w-100" v-model="work_order.work_order_attachments" placeholder="Choose Location">
+                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in locationInstallations" :key="index"></el-option>
+                </el-select>
+            </el-form-item>
+        </div>
        
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -208,6 +222,7 @@ export default {
                 task_category_id: '',
                 priority_id: '',
                 assignees: [],
+                work_order_attachments: [],
                 work_order_items: [
                     {
                         name: '',
@@ -275,6 +290,12 @@ export default {
             priorities: (state) => state.Priority.priorities,
             task_categories: (state) => state.TaskCategory.task_categories,
             locations: (state) => state.Location.locations,
+            locationInstallations: (state) => state.LocationInstallation.locationInstallations.map((item) => {
+                return {
+                    name: item.name,
+                    value: item.id + ':' + item.type_relation,
+                };
+            }),
         }),
 
     },
@@ -350,7 +371,12 @@ export default {
         },
 
         setForm(work_order) {
-            this.work_order = {...this.work_order, ...work_order};
+            let data = {...work_order};
+
+            data.work_order_attachments = work_order.work_order_attachments.map((item) => { 
+                return item.attach_id + ':' + item.attach_type
+            });
+            this.work_order = {...this.work_order, ...data};
             this.work_order.assignees = work_order.assignees.map((item) => item.user_id);
         },
 
@@ -360,6 +386,8 @@ export default {
                 description: '',
                 task_category_id: '',
                 priority_id: '',
+                fill_history_pompa: 0,
+                work_order_attachments: [],
                 work_order_items: [
                     {
                         name: '',
@@ -381,6 +409,8 @@ export default {
                 return item;
             });
 
+            workorder.work_order_attachments = task.task_attachments.map((item) => item.attach_id + ':' + item.attach_type);
+
             this.work_order = {...this.work_order, ...workorder};
         }
         
@@ -388,6 +418,9 @@ export default {
 
     mounted() {
        this.$nextTick().then(() => {
+            this.$store.dispatch('fetchLocationInstallations' , {
+                status: 'active',
+            })
             this.$store.dispatch('fetchUsers', {relations: 'roles',}).then((response) => {
 
                 let users = response.data.data;

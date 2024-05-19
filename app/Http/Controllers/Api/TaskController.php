@@ -9,6 +9,7 @@ use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -31,7 +32,15 @@ class TaskController extends Controller
     {
         $datas = $request->except('task_items');
 
-        $task = $this->task_repo->createTask($datas, $request->get('task_items', []));
+        DB::beginTransaction();
+
+        try {
+            $task = $this->task_repo->createTask($datas, $request->get('task_items', []));
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+        }
 
         return response()->json([
             'message' => 'Berhasil menambahkan task',

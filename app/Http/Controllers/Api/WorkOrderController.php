@@ -97,7 +97,8 @@ class WorkOrderController extends Controller
             'user_created' , 
             'location', 
             'assignees.user' , 
-            'work_order_logs.user_created'
+            'work_order_logs.user_created',
+            'work_order_attachments.history_pompa.location.pompa'
         ]));
     }
 

@@ -15,7 +15,7 @@ class WorkOrder extends Model
     protected $table = 'work_orders';
     
     protected $fillable = [
-        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id' , 'operational_activities'
+        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id' , 'operational_activities', 'fill_history_pompa'
     ];
 
     public function getAutoNumberOptions()
@@ -83,5 +83,10 @@ class WorkOrder extends Model
     public function work_order_logs()
     {
         return $this->hasMany(WorkOrderLog::class , 'work_order_id')->orderBy('id', 'desc');
+    }
+
+    public function work_order_attachments()
+    {
+        return $this->hasMany(WorkOrderAttachment::class , 'work_order_id');
     }
 }

@@ -11,6 +11,7 @@ use App\Events\WorkorderUpdated;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\WorkOrder;
+use App\Repositories\WorkOrderAttachmentRepository;
 use App\Repositories\WorkOrderItemRepository;
 use App\Repositories\WorkOrderRepository;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         $data = $this->removeStatusInArray($data);
 
         $work_item_repo = app(WorkOrderItemRepository::class);
+        $work_order_attachment_repo = app(WorkOrderAttachmentRepository::class);
 
         $work_order = $this->create($data);
 
@@ -32,6 +34,25 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         foreach ($items as $item) {
             $item['work_order_id'] = $work_order->id;
             $work_item_repo->createItem($item);   
+        }
+
+        if (isset($data['work_order_attachments']) && is_array($data['work_order_attachments'])) {
+            foreach ($data['work_order_attachments'] as $value) {
+                $explode = explode(':', $value);
+                if (count($explode) == 2) {
+                    // $work_order->work_order_attachments()->create([
+                    //     'work_order_id' => $work_order->id,
+                    //     'attach_id' => $explode[0],
+                    //     'attach_type' => $explode[1],
+                    // ]);
+
+                    $work_order_attachment_repo->createAttachment([
+                        'work_order_id' => $work_order->id,
+                        'attach_id' => $explode[0],
+                        'attach_type' => $explode[1],
+                    ]);
+                }
+            }
         }
 
         event(new WorkorderCreated($work_order));
@@ -45,6 +66,9 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
         $data = $this->removeStatusInArray($data);
 
         $work_item_repo = app(WorkOrderItemRepository::class);
+        $work_order_attachment_repo = app(WorkOrderAttachmentRepository::class);
+
+        
         $model = $this->update($work_order , $data);
 
         $work_item_repo->removeUnusedItem($model->work_order_items, $items);
@@ -61,6 +85,30 @@ class EloquentWorkOrderRepository extends EloquentBaseRepository implements Work
                 $item['work_order_id'] = $model->id;
                 $data = $work_item_repo->createItem($item, $media);
             }
+        }
+
+        if (isset($data['fill_history_pompa']) && $data['fill_history_pompa'] == 1) {
+            if (isset($data['work_order_attachments']) && is_array($data['work_order_attachments'])) {
+
+                $work_order->work_order_attachments()->delete();
+
+                foreach ($data['work_order_attachments'] as $value) {
+                    $explode = explode(':', $value);
+                    if (count($explode) == 2) {
+                        $work_order_attachment_repo->createAttachment([
+                            'work_order_id' => $work_order->id,
+                            'attach_id' => $explode[0],
+                            'attach_type' => $explode[1],
+                        ]);
+                    }
+                }
+            }
+        } else if (isset($data['fill_history_pompa']) && $data['fill_history_pompa'] == 0) {
+            $work_order->work_order_attachments()->delete();
+
+            $work_order->update([
+                'fill_history_pompa' => 0
+            ]);
         }
 
         event(new WorkorderUpdated($model));

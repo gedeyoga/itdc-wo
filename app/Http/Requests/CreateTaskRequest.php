@@ -27,7 +27,7 @@ class CreateTaskRequest extends FormRequest
             'name' => 'required|string', 
             'description' => 'required|string', 
             'task_category_id' => 'required', 
-            'priority_id' => 'required'
+            'priority_id' => 'required',
         ];
     }
 }
