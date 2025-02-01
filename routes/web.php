@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\TaskScheduleController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Admin\MinuteCounterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('export/report/daily', [ReportController::class, 'reportDailyPdf'])->name('report.daily');
     
     Route::get('/report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
+    Route::get('/history/minute-counter', [MinuteCounterController::class, 'index'])->name('history.minute-counter.list');
+    Route::get('/history/minute-counter/detail/{location_instalation_id}', [MinuteCounterController::class, 'detail'])->name('history.minute-counter.detail');
 
 });
 

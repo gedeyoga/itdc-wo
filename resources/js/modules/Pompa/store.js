@@ -22,7 +22,10 @@ export default {
             return new Promise((resolve, reject) => {
                 axios
                     .get(route("api.pompas.list"), {
-                        params: params,
+                        params: {
+                            ...params,
+                            status: 'active',
+                        },
                     })
                     .then((response) => {
                         commit("setPompas", response.data.data);

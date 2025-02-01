@@ -125,10 +125,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //Location Installation
     Route::group(['prefix' => 'location-installations', 'as' => 'api.location-installations.'], function () {
         Route::get('/', [LocationInstallationController::class, 'list'])->name('list');
+        Route::get('/history', [LocationInstallationController::class, 'reportLocationInstallation'])->name('history');
         Route::post('/', [LocationInstallationController::class, 'store'])->name('store');
         Route::put('/{location_installation}', [LocationInstallationController::class, 'update'])->name('update');
         Route::get('/{location_installation}', [LocationInstallationController::class, 'show'])->name('show');
         Route::delete('/{location_installation}', [LocationInstallationController::class, 'destroy'])->name('destroy');
+
+
     });
 
     Route::group(['prefix' => 'tenants', 'as' => 'api.tenants.'], function () {
@@ -140,6 +143,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::group(['prefix' => 'history-pompas', 'as' => 'api.history-pompas.'], function () {
+
+        Route::get('/', [HistoryPompaController::class, 'historyPompaByLocation'])->name('list');
         Route::put('/{history_pompa}', [HistoryPompaController::class, 'update'])->name('update');
     });
 
