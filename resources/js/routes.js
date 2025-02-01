@@ -13,6 +13,7 @@ import LocationRoutes from "./modules/Location/LocationRoutes";
 import PompaRoutes from "./modules/Pompa/PompaRoutes";
 import LocationInstallationRoutes from "./modules/LocationInstallation/LocationInstallationRoutes";
 import TenantRoutes from "./modules/Tenant/TenantRoutes";
+import HistoryRoutes from "./modules/History/HistoryRoutes";
 
 
 Vue.use(VueRouter);
@@ -30,6 +31,7 @@ const routes = [
     ...PompaRoutes,
     ...LocationInstallationRoutes,
     ...TenantRoutes,
+    ...HistoryRoutes,
 ];
 
 const router = new VueRouter({

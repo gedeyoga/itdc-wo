@@ -83,7 +83,24 @@
                 "active": false,
                 "permissions": [
                     "task.task-list",
-                    "task-schedule.task-schedule-list"
+                    "task-schedule.task-schedule-list",
+                    "meter-counter.meter-counter-list"
+                ]
+            },
+            {
+                "menu_title": "History",
+                "menu_icon": "bxs-book",
+                "child_routes": [
+                    {
+                        "name": "history.minute-counter.list",
+                        "menu_title": "Minute Counter",
+                        "active": false,
+                        "permissions": ["minute-counter.minute-counter-list"]
+                    }
+                ],
+                "active": false,
+                "permissions": [
+                    "minute-counter.minute-counter-list"
                 ]
             },
             {

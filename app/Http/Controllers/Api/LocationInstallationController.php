@@ -70,7 +70,8 @@ class LocationInstallationController extends Controller
 
     public function show(LocationInstallation $location_installation)
     {
-        return new LocationInstallationResource($location_installation);
+
+        return new LocationInstallationResource($location_installation->load(['pompa', 'location']));
     }
 
     public function destroy(LocationInstallation $location_installation)
@@ -81,5 +82,14 @@ class LocationInstallationController extends Controller
         return response()->json([
             'message' => 'Location installation delete successfuly'
         ]);
+    }
+
+    public function reportLocationInstallation(Request $request)
+    {
+        $params = $request->all();
+        $params['relations'] = 'pompa,location';
+        $datas = $this->location_installation_repo->historyPompaList($params);
+        
+        return LocationInstallationResource::collection($datas);
     }
 }

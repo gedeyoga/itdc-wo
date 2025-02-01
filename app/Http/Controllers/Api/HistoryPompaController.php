@@ -41,4 +41,15 @@ class HistoryPompaController extends Controller
         ]);
     }
 
+    public function historyPompaByLocation(Request $request)
+    {
+        $request->validate([
+            'location_installation_id' => 'required'
+        ]);
+        
+        $datas = $this->history_pompa_repo->historyPompaByLocations($request->get('location_installation_id') , $request->except(['location_installation_id']));
+
+        return HistoryPompaResource::collection($datas);
+    }
+
 }

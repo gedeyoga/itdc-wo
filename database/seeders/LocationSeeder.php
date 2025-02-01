@@ -14,6 +14,17 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        Location::factory()->count(5)->create();
+        $datas = [
+            ['name' => 'Location 1'],
+            ['name' => 'Location 2'],
+            ['name' => 'Location 3'],
+            ['name' => 'Location 4'],
+            ['name' => 'Location 5'],
+        ];
+
+        
+        foreach ($datas as $location) {
+            Location::create($location);
+        }
     }
 }

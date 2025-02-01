@@ -19,5 +19,10 @@ class WorkOrderAttachment extends Model
     {
         return $this->hasOne(HistoryPompa::class , 'work_order_attachment_id');
     }
+
+    public function work_order()
+    {
+        return $this->belongsTo(WorkOrder::class, 'work_order_id');
+    }
     
 }

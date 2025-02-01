@@ -23,7 +23,7 @@ class HistoryPompa extends Model
         return $this->belongsTo(LocationInstallation::class , 'location_installation_id');
     }
 
-    public function work_order()
+    public function work_order_attachment()
     {
         return $this->belongsTo(WorkOrderAttachment::class , 'work_order_attachment_id');
     }

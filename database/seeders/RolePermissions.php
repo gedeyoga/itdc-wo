@@ -58,6 +58,20 @@ class RolePermissions extends Seeder
             ['name' => 'location.location-create', 'guard_name' => 'sanctum'],
             ['name' => 'location.location-update', 'guard_name' => 'sanctum'],
             ['name' => 'location.location-delete', 'guard_name' => 'sanctum'],
+            ['name' => 'location-installation.location-installation-list', 'guard_name' => 'sanctum'],
+            ['name' => 'location-installation.location-installation-create', 'guard_name' => 'sanctum'],
+            ['name' => 'location-installation.location-installation-update', 'guard_name' => 'sanctum'],
+            ['name' => 'location-installation.location-installation-delete', 'guard_name' => 'sanctum'],
+            ['name' => 'tenant.tenant-list', 'guard_name' => 'sanctum'],
+            ['name' => 'tenant.tenant-create', 'guard_name' => 'sanctum'],
+            ['name' => 'tenant.tenant-update', 'guard_name' => 'sanctum'],
+            ['name' => 'tenant.tenant-delete', 'guard_name' => 'sanctum'],
+            ['name' => 'minute-counter.minute-counter-list', 'guard_name' => 'sanctum'],
+            ['name' => 'minute-counter.minute-counter-detail', 'guard_name' => 'sanctum'],
+            ['name' => 'pompa.pompa-list', 'guard_name' => 'sanctum'],
+            ['name' => 'pompa.pompa-create', 'guard_name' => 'sanctum'],
+            ['name' => 'pompa.pompa-update', 'guard_name' => 'sanctum'],
+            ['name' => 'pompa.pompa-delete', 'guard_name' => 'sanctum'],
         ];
 
         foreach ($permissions as $permission) {
