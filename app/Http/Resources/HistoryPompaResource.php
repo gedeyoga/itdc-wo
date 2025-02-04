@@ -15,6 +15,7 @@ class HistoryPompaResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
+        $data['work_order_attachment'] = new WorkOrderAttachmentResource($this->whenLoaded('work_order_attachment'));
         $data['created_at'] = $this->created_at->format('Y-m-d H:i:s');
         $data['updated_at'] = $this->created_at->format('Y-m-d H:i:s');
 

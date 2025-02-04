@@ -15,6 +15,7 @@ class WorkOrderAttachmentResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
+        $data['work_order'] = new WorkOrderResource($this->whenLoaded('work_order'));
 
         $attach_types = [
             'location_installation' => new HistoryPompaResource($this->whenLoaded('history_pompa'))

@@ -21,6 +21,22 @@
             </div>
             <div class="card-body">
 
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <span class="filter-text">
+                            <small>Filter Date</small>
+                        </span>
+                        <el-date-picker 
+                            style="width: 100%" 
+                            v-model="filter.periode" 
+                            type="month"
+                            @change="fetchDetailMinuteCounter"
+                            format="MMMM yyyy" 
+                            value-format="yyyy-MM-dd">
+                        </el-date-picker>
+                    </div>
+                </div>
+
                 <el-table
                     :data="listHistory"
                     stripe
@@ -69,6 +85,8 @@
 <script>
 import _ from "lodash";
 import DialogDetailWorkOrder from "../../../Workorder/components/DialogDetailWorkOrder.vue";
+import moment from "moment";
+
 
 export default {
     components:{
@@ -86,7 +104,7 @@ export default {
             },
 
             filter: {
-                periode: "2024-06-01",
+                periode: moment().startOf().format('YYYY-MM-01'),
             },
         };
     },
@@ -99,7 +117,7 @@ export default {
             for (let day = 1; day <= lastDay; day++) {
 
                 let parts = this.filter.periode.split('-');
-                let date = parts[0] + '-' + parts[1] + '-' + day;
+                let date = parts[0] + '-' + parts[1] + '-' + (day < 10 ? '0' + day : day);
 
                 let dataHistory = this.history_pompas.find((item) => {
                     let part_date = item.created_at.split(' ');
@@ -140,10 +158,9 @@ export default {
     methods: {
         async fetchDetailMinuteCounter()
         {
+            console.log(this.$route.params.location_installation_id);
             const response = await axios.get(route('api.location-installations.show' , {
-                params: {
-                    location_installation_id: this.$route.params.location_installation_id,
-                }
+                location_installation: this.$route.params.location_installation_id,
             }))
 
             if(response.status == 200) {

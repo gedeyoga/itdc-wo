@@ -145,7 +145,7 @@ export default {
             },
             list_roles: [],
             filter: {
-                date: moment().startOf().format('YYYY-MM-D'),
+                date: moment().startOf().format('YYYY-MM-DD'),
                 search: "",
                 user_id: [],
             },
@@ -224,7 +224,8 @@ export default {
 
         getDataPercentagePerDay(row, day){
             const date = this.filter.date.split('-');
-            const data = row[date[0] + '-' + date[1] + '-' + day];
+            const dayNumber = day < 10 ? '0' + day : day;
+            const data = row[date[0] + '-' + date[1] + '-' + dayNumber];
             return data ? data + '%' : '-';
         },
 
@@ -235,10 +236,12 @@ export default {
 
         getPropCell(day){
             const date = this.filter.date.split('-');
-            return moment(date[0]  + '-' + date[1] + '-' + day).format('YYYY-MM-D');
+            return moment(date[0]  + '-' + date[1] + '-' + day).format('YYYY-MM-DD');
         },
 
         handleClickCell(row, column, cell, event) {
+
+            console.log(row, column.property);
             
             if(column.property) {
                 if(row[column.property]) {

@@ -2,7 +2,7 @@
     <el-dialog
         :title="getTitle(filter.date[0])"
         :visible.sync="show"
-        width="90%"
+        width="60%"
         :close-on-click-modal="false"
     >
         <div class="row border mx-2 align-items-center p-4 p-lg-2 rounded">
