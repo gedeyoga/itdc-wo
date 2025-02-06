@@ -21,7 +21,7 @@ class WorkOrderAttachmentResource extends JsonResource
             'location_installation' => new HistoryPompaResource($this->whenLoaded('history_pompa'))
         ];
 
-        $data['relation'] = $attach_types[$this->attach_type];
+        // $data['relation'] = $attach_types[$this->attach_type];
 
         return $data;
     }

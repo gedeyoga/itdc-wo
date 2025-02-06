@@ -14,6 +14,7 @@ import PompaRoutes from "./modules/Pompa/PompaRoutes";
 import LocationInstallationRoutes from "./modules/LocationInstallation/LocationInstallationRoutes";
 import TenantRoutes from "./modules/Tenant/TenantRoutes";
 import HistoryRoutes from "./modules/History/HistoryRoutes";
+import AssetMasterRoutes from "./modules/AssetMaster/AssetMasterRoutes";
 
 
 Vue.use(VueRouter);
@@ -32,6 +33,7 @@ const routes = [
     ...LocationInstallationRoutes,
     ...TenantRoutes,
     ...HistoryRoutes,
+    ...AssetMasterRoutes,
 ];
 
 const router = new VueRouter({

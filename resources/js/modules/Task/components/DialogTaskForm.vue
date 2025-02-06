@@ -127,14 +127,14 @@
 
         <div class="mt-4">
             <h5>Attachment</h5>
-            <el-checkbox v-model="task.fill_history_pompa" :true-label="1" :false-label="0">Wajib mencatat meter counter pompa</el-checkbox>
-            <el-form-item v-if="task.fill_history_pompa" label="Choose Location Installation" prop="task_attachments" :rules="{
+            <el-checkbox v-model="task.fill_asset" :true-label="1" :false-label="0">Wajib mencatat asset</el-checkbox>
+            <el-form-item v-if="task.fill_asset" label="Choose Location Installation" prop="task_attachments" :rules="{
                 required: true,
                 trigger: ['change'],
                 message: 'Field required.'
             }">
                 <el-select clearable filterable multiple class="w-100" v-model="task.task_attachments" placeholder="Choose Location">
-                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in locationInstallations" :key="index"></el-option>
+                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in asset_masters" :key="index"></el-option>
                 </el-select>
             </el-form-item>
         </div>
@@ -171,6 +171,7 @@ export default {
                     }
                 ],
                 fill_history_pompa: false,
+                fill_asset: 0,
                 task_attachments: [],
             },
             rules: {
@@ -219,6 +220,12 @@ export default {
             task_categories: (state) => state.TaskCategory.task_categories,
             locations: (state) => state.Location.locations,
             locationInstallations: (state) => state.LocationInstallation.locationInstallations.map((item) => {
+                return {
+                    name: item.name,
+                    value: item.id + ':' + item.type_relation,
+                };
+            }),
+            asset_masters: (state) => state.AssetMaster.asset_masters.map((item) => {
                 return {
                     name: item.name,
                     value: item.id + ':' + item.type_relation,

@@ -178,14 +178,14 @@
 
         <div class="mt-4">
             <h5>Attachment</h5>
-            <el-checkbox v-model="work_order.fill_history_pompa" :true-label="1" :false-label="0">Wajib mencatat meter counter pompa</el-checkbox>
-            <el-form-item v-if="work_order.fill_history_pompa" label="Choose Location Installation" prop="work_order_attachments" :rules="{
+            <el-checkbox v-model="work_order.fill_asset" :true-label="1" :false-label="0">Wajib mencatat asset</el-checkbox>
+            <el-form-item v-if="work_order.fill_asset" label="Choose Location Installation" prop="work_order_attachments" :rules="{
                 required: true,
                 trigger: ['change'],
                 message: 'Field required.'
             }">
-                <el-select clearable filterable multiple class="w-100" v-model="work_order.work_order_attachments" placeholder="Choose Location">
-                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in locationInstallations" :key="index"></el-option>
+                <el-select clearable filterable multiple class="w-100" v-model="work_order.work_order_attachments" placeholder="Choose Asset">
+                    <el-option :value="item.value" :label="item.name" v-for="(item, index) in asset_masters" :key="index"></el-option>
                 </el-select>
             </el-form-item>
         </div>
@@ -296,6 +296,12 @@ export default {
                     value: item.id + ':' + item.type_relation,
                 };
             }),
+            asset_masters: (state) => state.AssetMaster.asset_masters.map((item) => {
+                return {
+                    name: item.name,
+                    value: item.id + ':' + item.type_relation,
+                };
+            }),
         }),
 
     },
@@ -387,6 +393,7 @@ export default {
                 task_category_id: '',
                 priority_id: '',
                 fill_history_pompa: 0,
+                fill_asset: 0,
                 work_order_attachments: [],
                 work_order_items: [
                     {
@@ -418,9 +425,11 @@ export default {
 
     mounted() {
        this.$nextTick().then(() => {
-            this.$store.dispatch('fetchLocationInstallations' , {
+            this.$store.dispatch('fetchAssetMasters' , {
                 status: 'active',
-            })
+            });
+
+
             this.$store.dispatch('fetchUsers', {relations: 'roles',}).then((response) => {
 
                 let users = response.data.data;

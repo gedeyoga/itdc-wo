@@ -66,12 +66,16 @@ class RolePermissions extends Seeder
             ['name' => 'tenant.tenant-create', 'guard_name' => 'sanctum'],
             ['name' => 'tenant.tenant-update', 'guard_name' => 'sanctum'],
             ['name' => 'tenant.tenant-delete', 'guard_name' => 'sanctum'],
-            ['name' => 'minute-counter.minute-counter-list', 'guard_name' => 'sanctum'],
-            ['name' => 'minute-counter.minute-counter-detail', 'guard_name' => 'sanctum'],
+            ['name' => 'history.history-asset-list', 'guard_name' => 'sanctum'],
+            ['name' => 'history.history-asset-detail', 'guard_name' => 'sanctum'],
             ['name' => 'pompa.pompa-list', 'guard_name' => 'sanctum'],
             ['name' => 'pompa.pompa-create', 'guard_name' => 'sanctum'],
             ['name' => 'pompa.pompa-update', 'guard_name' => 'sanctum'],
             ['name' => 'pompa.pompa-delete', 'guard_name' => 'sanctum'],
+            ['name' => 'asset-master.asset-master-list', 'guard_name' => 'sanctum'],
+            ['name' => 'asset-master.asset-master-create', 'guard_name' => 'sanctum'],
+            ['name' => 'asset-master.asset-master-update', 'guard_name' => 'sanctum'],
+            ['name' => 'asset-master.asset-master-delete', 'guard_name' => 'sanctum'],
         ];
 
         foreach ($permissions as $permission) {

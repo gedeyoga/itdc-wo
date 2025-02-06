@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AssetMasterController;
+use App\Http\Controllers\Api\AssetMasterParameterUsageController;
 use App\Http\Controllers\Api\TenantController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\HistoryPompaController;
@@ -146,6 +148,20 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::get('/', [HistoryPompaController::class, 'historyPompaByLocation'])->name('list');
         Route::put('/{history_pompa}', [HistoryPompaController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'asset-masters', 'as' => 'api.asset-masters.'], function () {
+        Route::get('/', [AssetMasterController::class, 'list'])->name('list');
+        Route::post('/', [AssetMasterController::class, 'store'])->name('store');
+        Route::put('/{asset_master}', [AssetMasterController::class, 'update'])->name('update');
+        Route::get('/{asset_master}', [AssetMasterController::class, 'show'])->name('show');
+        Route::delete('/{asset_master}', [AssetMasterController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::group(['prefix' => 'asset-usages', 'as' => 'api.asset-usages.'], function () {
+        Route::get('/', [AssetMasterParameterUsageController::class, 'historyAsset'])->name('history-assets');
+        Route::get('/detail', [AssetMasterParameterUsageController::class, 'detail'])->name('history-assets.detail');
+        Route::post('/update-usage', [AssetMasterParameterUsageController::class, 'updateUsageData'])->name('update-usage');
     });
 
 

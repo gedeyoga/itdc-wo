@@ -9,6 +9,7 @@ import Task from "./modules/Task/store";
 import Pompa from "./modules/Pompa/store";
 import Tenant from "./modules/Tenant/store";
 import LocationInstallation from "./modules/LocationInstallation/store";
+import AssetMaster from "./modules/AssetMaster/store";
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ const store = new Vuex.Store({
         Pompa,
         Tenant,
         LocationInstallation,
+        AssetMaster
     },
 });
 

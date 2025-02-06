@@ -13,7 +13,7 @@ class Task extends Model implements HasMedia
     use HasFactory, SoftDeletes , InteractsWithMedia;
 
     protected $fillable = [
-        'name','description','task_category_id','priority_id', 'location_id', 'fill_history_pompa'
+        'name','description','task_category_id','priority_id', 'location_id', 'fill_history_pompa', 'fill_asset'
     ];
 
     public static function boot()

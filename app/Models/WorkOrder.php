@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class WorkOrder extends Model
 {
@@ -15,7 +16,7 @@ class WorkOrder extends Model
     protected $table = 'work_orders';
     
     protected $fillable = [
-        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id' , 'operational_activities', 'fill_history_pompa'
+        'code','name', 'description', 'task_category_id' , 'priority_id','status','date','start_at', 'start_by','finish_at','finish_by','created_by','location_id' , 'operational_activities', 'fill_history_pompa', 'fill_asset'
     ];
 
     public function getAutoNumberOptions()

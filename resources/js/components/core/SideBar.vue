@@ -156,6 +156,8 @@ export default {
       let checkPermission = [];
       
       permissions.forEach((permission) => {
+
+        console.log(this.hasAccess(permission), permission);
         checkPermission.push(this.hasAccess(permission));
       })
 
