@@ -25,6 +25,12 @@
                         "permissions": ["pompa.pompa-list"]
                     },
                     {
+                        "name": "asset-masters.list",
+                        "menu_title": "Asset",
+                        "active": false,
+                        "permissions": ["asset-master.asset-master-list"]
+                    },
+                    {
                         "name": "location-installations.index",
                         "menu_title": "Location Installation",
                         "active": false,
@@ -43,7 +49,8 @@
                     "locations.location-list",
                     "pompa.pompa-list",
                     "location-installation.location-installation-list",
-                    "tenant.tenant-list"
+                    "tenant.tenant-list",
+                    "asset-master.asset-master"
                 ]
             },
             {
@@ -83,8 +90,7 @@
                 "active": false,
                 "permissions": [
                     "task.task-list",
-                    "task-schedule.task-schedule-list",
-                    "meter-counter.meter-counter-list"
+                    "task-schedule.task-schedule-list"
                 ]
             },
             {
@@ -92,15 +98,15 @@
                 "menu_icon": "bxs-book",
                 "child_routes": [
                     {
-                        "name": "history.minute-counter.list",
-                        "menu_title": "Minute Counter",
+                        "name": "history.history-asset.list",
+                        "menu_title": "History Asset",
                         "active": false,
-                        "permissions": ["minute-counter.minute-counter-list"]
+                        "permissions": ["history.history-asset.list"]
                     }
                 ],
                 "active": false,
                 "permissions": [
-                    "minute-counter.minute-counter-list"
+                    "history.history-asset.list"
                 ]
             },
             {
@@ -123,7 +129,7 @@
                 "active": false,
                 "permissions": [
                     "report-daily.report-daily-list",
-                    "report-daily.report-monthly-list"
+                    "report-monthly.report-monthly-list"
                 ]
             },
             {

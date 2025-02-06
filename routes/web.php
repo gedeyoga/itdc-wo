@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetMasterParameterUsageController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LocationController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\WorkOrderController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Admin\MinuteCounterController;
+use App\Http\Controllers\Api\AssetMasterParameterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/task-schedules' , [TaskScheduleController::class, 'index'])->name('task-schedules.list');
     Route::get('/priorities' , [PriorityController::class, 'index'])->name('priorities.list');
     Route::get('/pompas' , [PompaController::class, 'index'])->name('pompas.list');
+    Route::get('/asset-masters' , [PompaController::class, 'index'])->name('asset-masters.list');
     Route::get('/location-installations' , [LocationInstallationController::class, 'index'])->name('location-installations.list');
     Route::get('/tenants' , [TenantController::class, 'index'])->name('tenants.list');
 
@@ -60,8 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('export/report/daily', [ReportController::class, 'reportDailyPdf'])->name('report.daily');
     
     Route::get('/report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
-    Route::get('/history/minute-counter', [MinuteCounterController::class, 'index'])->name('history.minute-counter.list');
-    Route::get('/history/minute-counter/detail/{location_instalation_id}', [MinuteCounterController::class, 'detail'])->name('history.minute-counter.detail');
+    Route::get('/history/history-asset', [AssetMasterParameterUsageController::class, 'history'])->name('history.history-asset.list');
+    Route::get('/history/history-asset/detail/{asset_master}', [AssetMasterParameterUsageController::class, 'detail'])->name('history.history-asset.detail');
 
 });
 

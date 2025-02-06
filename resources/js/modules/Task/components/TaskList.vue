@@ -313,6 +313,9 @@ export default {
                 this.$store.dispatch('fetchLocationInstallations' , {
                     status: 'active',
                 }),
+                this.$store.dispatch('fetchAssetMasters' , {
+                    status: 'active',
+                }),
                 this.$store.dispatch('fetchPriorities'),
                 this.$store.dispatch('fetchTaskCategories'),
             ])

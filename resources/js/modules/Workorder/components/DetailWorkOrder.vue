@@ -8,7 +8,7 @@
                 </div>
             </template>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+               'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-user"></i>
@@ -27,7 +27,7 @@
                 </el-tag>
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-medal"></i>
@@ -36,7 +36,7 @@
                 <status-component :status="workorder.status"></status-component>
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-date"></i>
@@ -45,7 +45,7 @@
                 {{ workorder.date | formatDateTime }}
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-price-tag"></i>
@@ -54,7 +54,7 @@
                 {{ workorder.task_category.name }}
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-location"></i>
@@ -63,7 +63,7 @@
                 {{ workorder.location.name }}
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-user"></i>
@@ -84,7 +84,7 @@
                 <span v-else>-</span>
             </el-descriptions-item>
             <el-descriptions-item :labelStyle="{
-                'width': '170px',
+                'width': isMobile() ? '100px' :  '170px',
             }">
                 <template  slot="label">
                     <i class="el-icon-user"></i>
@@ -208,6 +208,7 @@
 import PriorityComponent from './PriorityComponent.vue'
 import StatusComponent from './StatusComponent.vue'
 import UploadMediaWorkorderItem from './UploadMediaWorkorderItem.vue'
+import AssetMasterAttachment from '../../AssetMaster/components/AssetMasterAttachment.vue';
 
 export default {
     props: ['workorder'],
@@ -216,6 +217,7 @@ export default {
         StatusComponent,
         UploadMediaWorkorderItem,
         'location-installation-attachment' : () => import("../../LocationInstallation/components/LocationInstallationAttachment.vue"),
+        AssetMasterAttachment,
     },
     data() {
         return {

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\AssetMaster;
+use App\Models\AssetMasterParameter;
+use App\Models\AssetMasterParameterUsage;
 use App\Models\HistoryPompa;
 use App\Models\Location;
 use App\Models\LocationInstallation;
@@ -21,6 +24,12 @@ use App\Models\WorkOrderAssignee;
 use App\Models\WorkOrderAttachment;
 use App\Models\WorkOrderItem;
 use App\Models\WorkOrderLog;
+use App\Repositories\AssetMasterParameterRepository;
+use App\Repositories\AssetMasterParameterUsageRepository;
+use App\Repositories\AssetMasterRepository;
+use App\Repositories\Eloquent\EloquentAssetMasterParameterRepository;
+use App\Repositories\Eloquent\EloquentAssetMasterParameterUsageRepository;
+use App\Repositories\Eloquent\EloquentAssetMasterRepository;
 use App\Repositories\Eloquent\EloquentHistoryPompaRepository;
 use App\Repositories\Eloquent\EloquentLocationInstallationRepository;
 use App\Repositories\Eloquent\EloquentLocationRepository;
@@ -199,6 +208,26 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WorkOrderAttachmentRepository::class, function () {
 
             $repository = new EloquentWorkOrderAttachmentRepository(new WorkOrderAttachment());
+
+            return $repository;
+        });
+        $this->app->bind(AssetMasterRepository::class, function () {
+
+            $repository = new EloquentAssetMasterRepository(new AssetMaster());
+
+            return $repository;
+        });
+
+        $this->app->bind(AssetMasterParameterRepository::class, function () {
+
+            $repository = new EloquentAssetMasterParameterRepository(new AssetMasterParameter());
+
+            return $repository;
+        });
+
+        $this->app->bind(AssetMasterParameterUsageRepository::class, function () {
+
+            $repository = new EloquentAssetMasterParameterUsageRepository(new AssetMasterParameterUsage());
 
             return $repository;
         });

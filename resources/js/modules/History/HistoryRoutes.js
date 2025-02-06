@@ -1,16 +1,16 @@
 
-import MinuteCounterList from "./components/minute-counter/MinuteCounterList";
-import DetailMinuteCounter from "./components/minute-counter/DetailMinuteCounter";
+import HistoryAssetList from "./components/history-asset/HistoryAssetList";
+import DetailHistoryAsset from "./components/history-asset/DetailHistoryAsset";
 
 export default [
     {
-        path: "/history/minute-counter",
-        name: "history.minute-counter.list",
-        component: MinuteCounterList,
+        path: "/history/history-asset",
+        name: "history.history-asset.list",
+        component: HistoryAssetList,
     },
     {
-        path: "/history/minute-counter/detail/:location_installation_id",
-        name: "history.minute-counter.detail",
-        component: DetailMinuteCounter,
+        path: "/history/history-asset/detail/:asset_master",
+        name: "history.history-asset.detail",
+        component: DetailHistoryAsset,
     },
 ];
